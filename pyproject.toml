@@ -1,18 +1,53 @@
 [project]
 name = "football-results"
 version = "0.1.0"
-description = ""
+description = "Service for following on football events and advanced stats for tournaments, countries, clubs, games and players in football"
 authors = [
     {name = "kasimov roman",email = "romkas04@icloud.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "django (>=5.2.6,<6.0.0)"
 ]
 
 [tool.poetry]
 packages = [{include = "football_results", from = "src"}]
 
+[tool.ruff]
+# Set the maximum line length to 120.
+line-length = 120
+indent-width = 4
+
+[tool.ruff.lint]
+select = [
+    "UP",
+    "D",
+    "I",
+    "E",
+    "W",
+    "F",
+    "B",
+    "C4",
+    "T20",
+    "T10",
+    "PT",
+    "RUF",
+    "SIM",
+    "DJ" # flake-django
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.12.12"
+pre-commit = "^4.3.0"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
