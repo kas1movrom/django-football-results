@@ -1,0 +1,99 @@
+@startuml er
+
+' hide the spot
+' hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "Турнир" as tur {
+  *id : number <<generated>>
+  --
+  status : bool (NN)
+  year : number (NN, U)
+  place : varchar (NN)
+  teams_count : number (NN)
+  winner : string
+}
+
+entity "Сборная-Турнир" as team_tur {
+  *id : number <<generated>>
+  --
+  *champ_id : number <<FK>>
+  *country_id : number <<FK>>
+}
+
+entity "Сборная" as team {
+  *id : number <<generated>>
+  --
+  trophies_count : number (NN)
+  name : string (NN, U)
+  mainland : string (NN)
+  flag : png (NN)
+}
+
+entity "Матч" as game {
+  *id : number <<generated>>
+  --
+  *home_id : number <<FK>>
+  *guest_id : number <<FK>>
+  *stage_id : number <<FK>>
+  stadium : string (NN)
+  result : string
+  all_result : string
+  date : date (NN)
+  type: ENUM (NN)
+  number : string (NN)
+}
+
+entity "Этап" as stage {
+  *id : number <<generated>>
+  --
+  *champ_id : number <<FK>>
+  status : ENUM (NN)
+  type : ENUM (NN)
+  number : number (NN)
+  U(type, number)
+}
+
+entity "Прогнозист" as player {
+  *id : number <<generated>>
+  --
+  name : string (NN)
+  surname : string (NN)
+  tg_nickname : string (NN, U)
+  mail : string (NN, U)
+  admin: bool
+  birthday : date (NN)
+}
+
+entity "Прогноз" as predict {
+  *id : number <<generated>>
+  --
+  *game_id : number <<FK>>
+  *player_id : number <<FK>>
+  status : ENUM (NN)
+  doubled : bool (NN)
+  result : string (NN)
+  date : date (NN)
+}
+
+entity "Прогнозист-Турнир" as pl_tur {
+  *id : number <<generated>>
+  --
+  *player_id : number <<FK>>
+  *champ_id : number <<FK>>
+  points : number (NN)
+}
+
+team_tur }|--|| tur
+team_tur }|--|| team
+pl_tur }|--|| player
+pl_tur }|--|| tur
+game }|--|| stage
+stage }|--|| tur
+predict }|--|| player
+predict }|--|| game
+game }|--|| team
+game }|--|| team
+@enduml
