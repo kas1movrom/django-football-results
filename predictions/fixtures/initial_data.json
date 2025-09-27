@@ -1,0 +1,308 @@
+[
+{
+  "model": "predictions.nationalteam",
+  "pk": 1,
+  "fields": {
+    "world_cup_count": 4,
+    "name": "Germany",
+    "mainland": "Europe",
+    "main_color": "White"
+  }
+},
+{
+  "model": "predictions.nationalteam",
+  "pk": 2,
+  "fields": {
+    "world_cup_count": 5,
+    "name": "Brazil",
+    "mainland": "South America",
+    "main_color": "Yellow"
+  }
+},
+{
+  "model": "predictions.nationalteam",
+  "pk": 3,
+  "fields": {
+    "world_cup_count": 4,
+    "name": "Italy",
+    "mainland": "Europe",
+    "main_color": "Blue"
+  }
+},
+{
+  "model": "predictions.nationalteam",
+  "pk": 4,
+  "fields": {
+    "world_cup_count": 3,
+    "name": "Argentina",
+    "mainland": "South America",
+    "main_color": "Blue-White"
+  }
+},
+{
+  "model": "predictions.nationalteam",
+  "pk": 5,
+  "fields": {
+    "world_cup_count": 2,
+    "name": "Urugway",
+    "mainland": "South America",
+    "main_color": "White-Blue"
+  }
+},
+{
+  "model": "predictions.nationalteam",
+  "pk": 6,
+  "fields": {
+    "world_cup_count": 2,
+    "name": "France",
+    "mainland": "Europe",
+    "main_color": "Blue"
+  }
+},
+{
+  "model": "predictions.nationalteam",
+  "pk": 7,
+  "fields": {
+    "world_cup_count": 1,
+    "name": "England",
+    "mainland": "Europe",
+    "main_color": "White"
+  }
+},
+{
+  "model": "predictions.nationalteam",
+  "pk": 8,
+  "fields": {
+    "world_cup_count": 1,
+    "name": "Spain",
+    "mainland": "Europe",
+    "main_color": "Red"
+  }
+},
+{
+  "model": "predictions.nationalteam",
+  "pk": 9,
+  "fields": {
+    "world_cup_count": 0,
+    "name": "Portugal",
+    "mainland": "Europe",
+    "main_color": "Red-Green"
+  }
+},
+{
+  "model": "predictions.nationalteam",
+  "pk": 10,
+  "fields": {
+    "world_cup_count": 0,
+    "name": "Netherlands",
+    "mainland": "Europe",
+    "main_color": "Orange"
+  }
+},
+{
+  "model": "predictions.nationalteam",
+  "pk": 11,
+  "fields": {
+    "world_cup_count": 0,
+    "name": "Russia",
+    "mainland": "Asia",
+    "main_color": "Red"
+  }
+},
+{
+  "model": "predictions.nationalteam",
+  "pk": 12,
+  "fields": {
+    "world_cup_count": 0,
+    "name": "Turkey",
+    "mainland": "Europe",
+    "main_color": "Red"
+  }
+},
+{
+  "model": "predictions.nationalteam",
+  "pk": 13,
+  "fields": {
+    "world_cup_count": 0,
+    "name": "USA",
+    "mainland": "North America",
+    "main_color": "White"
+  }
+},
+{
+  "model": "predictions.nationalteam",
+  "pk": 14,
+  "fields": {
+    "world_cup_count": 0,
+    "name": "Chile",
+    "mainland": "South America",
+    "main_color": "Red"
+  }
+},
+{
+  "model": "predictions.nationalteam",
+  "pk": 15,
+  "fields": {
+    "world_cup_count": 0,
+    "name": "Egypt",
+    "mainland": "Africa",
+    "main_color": "White"
+  }
+},
+{
+  "model": "predictions.nationalteam",
+  "pk": 16,
+  "fields": {
+    "world_cup_count": 0,
+    "name": "Australia",
+    "mainland": "Australia",
+    "main_color": "Yellow"
+  }
+},
+{
+  "model": "predictions.nationalteam",
+  "pk": 17,
+  "fields": {
+    "world_cup_count": 0,
+    "name": "Ukraine",
+    "mainland": "Europe",
+    "main_color": "Yellow-Blue"
+  }
+},
+{
+  "model": "predictions.nationalteam",
+  "pk": 18,
+  "fields": {
+    "world_cup_count": 0,
+    "name": "Mexico",
+    "mainland": "North America",
+    "main_color": "Green"
+  }
+},
+{
+  "model": "predictions.forecaster",
+  "pk": 1,
+  "fields": {
+    "first_name": "Roman",
+    "last_name": "Kasimov",
+    "telegram": "@kasimovrom",
+    "mail": "romkasrm11832@gmail.com",
+    "admin": true,
+    "birthday": "2004-09-25"
+  }
+},
+{
+  "model": "predictions.forecaster",
+  "pk": 2,
+  "fields": {
+    "first_name": "Renat",
+    "last_name": "Kasimov",
+    "telegram": "@ggplx",
+    "mail": "ren4ikas@gmail.com",
+    "admin": true,
+    "birthday": "2000-07-19"
+  }
+},
+{
+  "model": "predictions.tournament",
+  "pk": 1,
+  "fields": {
+    "active": false,
+    "year": 2018,
+    "place": "Russia",
+    "teams_count": 16,
+    "winner": "France",
+    "start_date": "2018-06-23",
+    "finish_date": "2018-07-23",
+    "national_teams": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ]
+  }
+},
+{
+  "model": "predictions.participation",
+  "pk": 1,
+  "fields": {
+    "forecaster": 1,
+    "tournament": 1,
+    "points": 0,
+    "register_time": "2025-09-23T22:46:02.371Z"
+  }
+},
+{
+  "model": "predictions.participation",
+  "pk": 2,
+  "fields": {
+    "forecaster": 2,
+    "tournament": 1,
+    "points": 0,
+    "register_time": "2025-09-23T22:46:09.798Z"
+  }
+},
+{
+  "model": "predictions.stage",
+  "pk": 1,
+  "fields": {
+    "status": "CL",
+    "st_type": "GR",
+    "number": 1,
+    "tournament": 1,
+    "start_date": "2018-06-23",
+    "finish_date": "2018-06-30"
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 1,
+  "fields": {
+    "stadium": "Luzhniki",
+    "game_time": "2018-06-23T22:46:48Z",
+    "number": "A",
+    "status": "FN",
+    "result": "2-1",
+    "all_result": "2-1",
+    "stage": 1,
+    "owner": 8,
+    "guest": 5
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 1,
+  "fields": {
+    "doubled": false,
+    "result": "1-1",
+    "register_date": "2025-09-23T22:49:59.864Z",
+    "status": "SV",
+    "player": 1,
+    "game": 1
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 2,
+  "fields": {
+    "doubled": false,
+    "result": "0-3",
+    "register_date": "2025-09-23T22:50:17.118Z",
+    "status": "SV",
+    "player": 2,
+    "game": 1
+  }
+}
+]
