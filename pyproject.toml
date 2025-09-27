@@ -16,6 +16,9 @@ dependencies = [
 packages = [{include = "football_results", from = "src"}]
 
 [tool.ruff]
+exclude = [
+    "predictions/migrations/**"
+]
 # Set the maximum line length to 120.
 line-length = 120
 indent-width = 4
