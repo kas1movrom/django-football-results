@@ -1,10 +1,29 @@
 """init."""
 
+import functools
+
+from django.contrib import admin
+from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+
+def validate_game_result(result):
+    """Validates result of the game."""
+    if "-" in result:
+        goals = result.split("-")
+
+        if len(goals) == 2 and goals[0].isdigit() and goals[-1].isdigit():
+            return
+
+    if result:
+        raise ValidationError(_("%(result)s is not a valid result"), params={"result": result})
+
+
 # Create your models here.
+
+# TODO: добавить в приложение учёт статусов всех сущностей
 
 
 # NOTE: can set ImageField instead of main_color use
@@ -41,7 +60,7 @@ class Forecaster(models.Model):
 
     def __str__(self):
         """Returns first_name and last_name of the player."""
-        return self.first_name + " " + self.last_name
+        return f"{self.first_name} {self.last_name}"
 
 
 # TODO: add start and end date of the tournament (dig)
@@ -62,7 +81,7 @@ class Tournament(models.Model):
 
     def __str__(self):
         """Returns a place and a year for tournament."""
-        return self.place + " " + str(self.year)
+        return f"{self.place} {self.year}"
 
 
 # TODO: add register time (dig)
@@ -84,8 +103,20 @@ class Participation(models.Model):
         """Returns Tournament (Player): points."""
         return f"{self.tournament} ({self.forecaster}): {self.points}"
 
+    def count_points(self):
+        """Returns player points on the tournament."""
+        return functools.reduce(
+            lambda x, y: x + y.doubled_points(),
+            Forecast.objects.filter(player=self.forecaster).filter(game__stage__tournament=self.tournament),
+            0,
+        )
 
-# TODO: add start and end date of the stage (dig)
+    @admin.display(description="Points")
+    def player_points(self):
+        """Returns points for admin panel."""
+        return self.count_points()
+
+
 # TODO: fix unique field in the diagram (dig)
 class Stage(models.Model):
     """Model for stages of each tournament."""
@@ -114,9 +145,22 @@ class Stage(models.Model):
 
     def __str__(self):
         """Returns 1/2 : Play-off (Russia 2018)."""
-        stg = f"Tour {self.number}" if self.st_type == "GR" else ("Final" if self.number == 1 else f"1/{self.number}")
+        return f"{self.get_pretty_number()} : {self.get_st_type_display()} ({self.tournament})"
 
-        return f"{stg} : {self.get_st_type_display()} ({self.tournament})"
+    def get_pretty_number(self):
+        """Returns pretty stage number."""
+        if self.st_type == "GR":
+            return f"Tour #{self.number}"
+
+        if self.number == 1:
+            return "Final"
+
+        return f"1/{self.number}"
+
+    @admin.display(description="Stage number")
+    def stage_number(self):
+        """Returns pretty stage number for admin panel."""
+        return self.get_pretty_number()
 
 
 # TODO: fix ERD diagram (dig)
@@ -135,7 +179,7 @@ class Game(models.Model):
     status = models.CharField(max_length=2, choices=GameStatus, default=GameStatus.NOT_STARTED)
 
     # NOTE: can add regex validation
-    result = models.CharField(max_length=5, blank=True)
+    result = models.CharField(max_length=5, blank=True, validators=[validate_game_result])
     all_result = models.CharField(max_length=12, blank=True)
 
     stage = models.ForeignKey(Stage, on_delete=models.CASCADE)
@@ -146,7 +190,21 @@ class Game(models.Model):
         """Returns home - away (tournament)."""
         return f"{self.owner} - {self.guest} ({self.stage.tournament})"
 
+    @staticmethod
+    def get_pretty_number(num):
+        """Returns pretty number of Group or game in the play-off."""
+        if num.isalpha():
+            return f"Group {num}"
 
+        return num
+
+    @admin.display(description="Bucket number")
+    def bucket_number(self):
+        """Pretty method for admin panel."""
+        return Game.get_pretty_number(self.number)
+
+
+# TODO: поменять название поля result (если это возможно)
 class Forecast(models.Model):
     """Model for a forecast on the match from forecaster."""
 
@@ -166,3 +224,41 @@ class Forecast(models.Model):
     def __str__(self):
         """Returns player data -- game data and predict."""
         return f"[{self.player} -- {self.game}] : {self.result}"
+
+    @staticmethod
+    def __same_winner(owner, guest, predict_owner, predict_guest):
+        diff = owner - guest
+        predict_diff = predict_owner - predict_guest
+
+        return diff * predict_diff > 0
+
+    def gm_result(self):
+        """Returns result of the game."""
+        return self.game.result
+
+    def doubled_points(self):
+        """Returns doubled points if forecast was doubled."""
+        bp = self.base_points()
+
+        return bp * 2 if self.doubled else bp
+
+    def base_points(self):
+        """Returns points for the forecast."""
+        own, gst = [int(goals) for goals in self.gm_result().split("-")]
+        p_own, p_gst = [int(goals) for goals in self.result.split("-")]
+
+        if own == p_own and gst == p_gst:
+            return 3
+
+        if own - gst == p_own - p_gst:
+            return 2
+
+        if Forecast.__same_winner(own, gst, p_own, p_gst):
+            return 1
+
+        return 0
+
+    @admin.display(description="Points")
+    def points(self):
+        """Returns points for admin."""
+        return self.doubled_points()

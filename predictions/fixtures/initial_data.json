@@ -282,6 +282,36 @@
   }
 },
 {
+  "model": "predictions.game",
+  "pk": 2,
+  "fields": {
+    "stadium": "GazProm Arena",
+    "game_time": "2018-06-23T22:46:48Z",
+    "number": "A",
+    "status": "FN",
+    "result": "0-1",
+    "all_result": "0-1",
+    "stage": 1,
+    "owner": 9,
+    "guest": 3
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 3,
+  "fields": {
+    "stadium": "Kazan Arena",
+    "game_time": "2018-06-24T12:46:48Z",
+    "number": "B",
+    "status": "FN",
+    "result": "0-3",
+    "all_result": "0-3",
+    "stage": 1,
+    "owner": 7,
+    "guest": 1
+  }
+},
+{
   "model": "predictions.forecast",
   "pk": 1,
   "fields": {
@@ -303,6 +333,54 @@
     "status": "SV",
     "player": 2,
     "game": 1
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 3,
+  "fields": {
+    "doubled": true,
+    "result": "1-2",
+    "register_date": "2025-09-23T22:49:59.864Z",
+    "status": "SV",
+    "player": 1,
+    "game": 2
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 4,
+  "fields": {
+    "doubled": true,
+    "result": "0-1",
+    "register_date": "2025-09-23T22:50:17.118Z",
+    "status": "SV",
+    "player": 2,
+    "game": 2
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 5,
+  "fields": {
+    "doubled": false,
+    "result": "1-4",
+    "register_date": "2025-09-23T22:49:59.864Z",
+    "status": "SV",
+    "player": 1,
+    "game": 3
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 6,
+  "fields": {
+    "doubled": false,
+    "result": "0-2",
+    "register_date": "2025-09-23T22:50:17.118Z",
+    "status": "SV",
+    "player": 2,
+    "game": 3
   }
 }
 ]

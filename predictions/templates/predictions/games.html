@@ -1,0 +1,57 @@
+{% extends 'predictions/base.html' %}
+
+{% block content %}
+    <form method="get">
+        <div>
+            <label for="id_name">Хозяева:</label>
+            <select name="name" id="id_name">
+                <option value="">Любая команда</option>
+                {% for team in all_teams %}
+                    <option value="{{ team.name }}" {% if filters.name == team.name %}selected{% endif %}>
+                        {{ team.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="id_sort">Сортировать по:</label>
+            <select name="sort" id="id_sort">
+                <option value="">Не сортировать</option>
+                <option value="game_time" {% if filters.sort == "game_time" %}selected{% endif %}>Времени матча</option>
+                <option value="result" {% if filters.sort == "result" %}selected{% endif %}>Результату</option>
+                <option value="stadium" {% if filters.sort == "stadium" %}selected{% endif %}>Стадиону</option>
+            </select>
+        </div>
+
+        <div>
+            <label>
+                <input type="checkbox" name="desc" value="true" {% if filters.desc == "true" %}checked{% endif %}>
+                По убыванию
+            </label>
+        </div>
+
+        <button type="submit">Применить</button>
+    </form>
+
+    <hr>
+
+    {% if games_list %}
+        <ul>
+        {% for game in games_list %}
+            <li>
+                <strong>{{ game }}</strong> -- {{ game.stage }}
+                <ul>
+                    {% for forecast in game.forecast_set.all %}
+                        <li>
+                            {{ forecast }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Матчи не найдены.</p>
+    {% endif %}
+{% endblock %}
