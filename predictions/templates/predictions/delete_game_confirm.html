@@ -1,0 +1,13 @@
+{% extends 'predictions/base.html' %}
+
+{% block content %}
+    <h2>Подтверждение удаления</h2>
+    <p>Вы уверены, что хотите удалить матч <strong>{{ game }}</strong>?</p>
+    <p>Все связанные прогнозы также будут удалены!</p>
+
+    <form method="post" action="{% url 'predictions:delete-game' game.id %}">
+        {% csrf_token %}
+        <button type="submit" style="background-color: #d32f2f; color: white;">Да, удалить</button>
+        <a href="{% url 'predictions:game-detail' game.id %}">Отмена</a>
+    </form>
+{% endblock %}

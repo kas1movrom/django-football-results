@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Национальная команда</title>
+</head>
+<body>
+    {% if messages %}
+        <div style="margin: 10px 0;">
+            {% for message in messages %}
+                <p style="padding: 8px; border-radius: 4px; color: white; background-color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <header>
+        <h1>Сборная: {{ national_team }}</h1>
+    </header>
+
+    <p><strong>Количество кубков:</strong> {{ national_team.world_cup_count }}</p>
+    <p><strong>Материк:</strong> {{ national_team.mainland }}</p>
+    <p><strong>Основной цвет сборной:</strong> {{ national_team.main_color }}</p>
+
+    {% if national_team.flag %}
+        <p><strong>Флаг:</strong><br>
+        <img src="{{ national_team.flag.url }}" alt="Флаг {{ national_team.name }}" style="max-width: 200px; border: 1px solid #ccc;">
+        </p>
+    {% else %}
+        <p>Флаг не загружен.</p>
+    {% endif %}
+
+    <p>
+      <a href="{% url 'predictions:edit-national-team' national_team.id %}">Редактировать сборную</a> |
+      <a href="{% url 'predictions:delete-national-team' national_team.id %}" style="color: red;">Удалить сборную</a>
+    </p>
+
+
+    <footer>
+        <p><a href="{% url 'predictions:national-teams' %}">← Назад к списку национальных команд</a></p>
+        <p>© 2025</p>
+    </footer>
+</body>
+</html>

@@ -9,6 +9,9 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
+# TODO: добавить imagefield (lecture-4)
+# TODO: добавить уникальность на некоторые столбцы (lecture-4)
+# TODO: добавить verbose name (также добавить в Meta) (lecture-4)
 def validate_game_result(result):
     """Validates result of the game."""
     if "-" in result:
@@ -26,7 +29,7 @@ def validate_game_result(result):
 # TODO: добавить в приложение учёт статусов всех сущностей
 
 
-# NOTE: can set ImageField instead of main_color use
+# NOTE: can set ImageField instead of main_color use - сделать это
 class NationalTeam(models.Model):
     """Model for the national football team."""
 
@@ -34,6 +37,7 @@ class NationalTeam(models.Model):
     name = models.CharField(max_length=20, unique=True)
     mainland = models.CharField(max_length=20)
     main_color = models.CharField(max_length=20)
+    flag = models.ImageField(upload_to="flags/", blank=True, null=True)
 
     def __str__(self):
         """Returns name of the country."""
@@ -53,7 +57,7 @@ class Forecaster(models.Model):
     admin = models.BooleanField(default=False)
     birthday = models.DateField()
 
-    class Meta:  # noqa: D106
+    class Meta:
         constraints = [  # noqa: RUF012
             models.UniqueConstraint(fields=["first_name", "last_name"], name="unique_fio")
         ]
@@ -94,7 +98,7 @@ class Participation(models.Model):
     points = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     register_time = models.DateTimeField(auto_now_add=True)
 
-    class Meta:  # noqa: D106
+    class Meta:
         constraints = [  # noqa: RUF012
             models.UniqueConstraint(fields=["forecaster", "tournament"], name="unique_forecaster_tournament")
         ]
@@ -121,12 +125,12 @@ class Participation(models.Model):
 class Stage(models.Model):
     """Model for stages of each tournament."""
 
-    class StageStatus(models.TextChoices):  # noqa: D106
+    class StageStatus(models.TextChoices):
         OPEN = "OP", _("Open")
         IN_PROGRESS = "IP", _("In Progress")
         CLOSED = "CL", _("Closed")
 
-    class StageType(models.TextChoices):  # noqa: D106
+    class StageType(models.TextChoices):
         GROUP = "GR", _("Group")
         PLAY_OFF = "PL", _("Play-Off")
 
@@ -138,7 +142,7 @@ class Stage(models.Model):
     start_date = models.DateField()
     finish_date = models.DateField()
 
-    class Meta:  # noqa: D106
+    class Meta:
         constraints = [  # noqa: RUF012
             models.UniqueConstraint(fields=["st_type", "number", "tournament"], name="unique_type_number_tournament")
         ]
@@ -167,7 +171,7 @@ class Stage(models.Model):
 class Game(models.Model):
     """Model for a game in the tournament."""
 
-    class GameStatus(models.TextChoices):  # noqa: D106
+    class GameStatus(models.TextChoices):
         NOT_STARTED = "NS", _("Not Started")
         PLAYING = "PL", _("Playing")
         FINISHED = "FN", _("Finished")
@@ -180,7 +184,7 @@ class Game(models.Model):
 
     # NOTE: can add regex validation
     result = models.CharField(max_length=5, blank=True, validators=[validate_game_result])
-    all_result = models.CharField(max_length=12, blank=True)
+    all_result = models.CharField(max_length=12, blank=True)  # TODO: add custom validator
 
     stage = models.ForeignKey(Stage, on_delete=models.CASCADE)
     owner = models.ForeignKey(NationalTeam, on_delete=models.CASCADE, related_name="home_games")
@@ -205,10 +209,11 @@ class Game(models.Model):
 
 
 # TODO: поменять название поля result (если это возможно)
+# TODO: почему прогноз не содержит количество очков....
 class Forecast(models.Model):
     """Model for a forecast on the match from forecaster."""
 
-    class ForecastStatus(models.TextChoices):  # noqa: D106
+    class ForecastStatus(models.TextChoices):
         EMPTY = "EM", _("Empty")
         SAVED = "SV", _("Saved")
         APPLIED = "AP", _("Applied")

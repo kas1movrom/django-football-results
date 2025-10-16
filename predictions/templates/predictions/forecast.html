@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Конкретный прогноз</title>
+</head>
+<body>
+    {% if messages %}
+        <div style="margin: 10px 0;">
+            {% for message in messages %}
+                <p style="padding: 8px; border-radius: 4px; color: white; background-color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <header>
+        <h1>Прогноз: {{ forecast }}</h1>
+    </header>
+
+    <p><strong>Игрок:</strong> {{ forecast.player }}</p>
+    <p><strong>Ставка:</strong> {{ forecast.result }}</p>
+    <p><strong>Результат матча:</strong> {{ game.result }}</p>
+    <p><strong>Удвоен ли матч:</strong> {{ forecast.doubled }}</p>
+    <p><strong>Количество очков:</strong> {{ forecast.points }}</p>
+
+    <p>
+      <a href="{% url 'predictions:edit-forecast' forecast.id %}">Редактировать прогноз</a> |
+      <a href="{% url 'predictions:delete-forecast-confirm' forecast.id %}" style="color: red;">Удалить прогноз</a>
+    </p>
+
+    <footer>
+        <p><a href="{% url 'predictions:game-forecasts' game.id %}">← Назад к списку прогнозов на матч</a></p>
+        <p>© 2025</p>
+    </footer>
+</body>
+</html>

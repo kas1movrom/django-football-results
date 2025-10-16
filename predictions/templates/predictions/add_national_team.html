@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Форма для создания сборной</title>
+</head>
+<body>
+    <header>
+        <h1>Форма для создания сборной</h1>
+    </header>
+
+    <h2>Добавить новую сборную</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Создать сборную</button>
+        <a href="{% url 'predictions:national-teams' %}">Отмена</a>
+    </form>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+                {{ message }}
+            </p>
+        {% endfor %}
+    {% endif %}
+    
+    <footer>
+        <p>© 2025</p>
+    </footer>
+</body>
+</html>

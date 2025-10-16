@@ -312,6 +312,21 @@
   }
 },
 {
+  "model": "predictions.game",
+  "pk": 4,
+  "fields": {
+    "stadium": "Spartak Arena",
+    "game_time": "2018-06-24T12:46:48Z",
+    "number": "B",
+    "status": "FN",
+    "result": "1-0",
+    "all_result": "1-0",
+    "stage": 1,
+    "owner": 10,
+    "guest": 12
+  }
+},
+{
   "model": "predictions.forecast",
   "pk": 1,
   "fields": {
@@ -381,6 +396,30 @@
     "status": "SV",
     "player": 2,
     "game": 3
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 7,
+  "fields": {
+    "doubled": false,
+    "result": "2-1",
+    "register_date": "2025-09-23T22:50:17.118Z",
+    "status": "SV",
+    "player": 1,
+    "game": 4
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 8,
+  "fields": {
+    "doubled": false,
+    "result": "0-1",
+    "register_date": "2025-09-23T22:50:17.118Z",
+    "status": "SV",
+    "player": 2,
+    "game": 4
   }
 }
 ]

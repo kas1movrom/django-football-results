@@ -1,0 +1,21 @@
+{% extends 'predictions/base.html' %}
+
+{% block content %}
+    {% if national_teams_list %}
+        <ul>
+        {% for national_team in national_teams_list %}
+            <li>
+                <a href="{% url 'predictions:national-team-detail' national_team.id %}"><strong>{{ national_team }}</strong></a> -- {{ national_team.mainland }}
+                <strong>Количество кубков: {{ national_team.world_cup_count }}</strong>
+                <strong>Основной цвет: {{ national_team.main_color }}</strong>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Сборные не найдены.</p>
+    {% endif %}
+
+    <p>
+        <a href="{% url 'predictions:add-national-team' %}">Добавить новую сборную</a>
+    </p>
+{% endblock %}
