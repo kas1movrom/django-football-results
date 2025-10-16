@@ -1,0 +1,20 @@
+{% extends 'predictions/base.html' %}
+
+{% block content %}
+    <h2>Редактировать национальную сборную: {{ national_team }}</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Сохранить изменения</button>
+        <a href="{% url 'predictions:national-team-detail' national_team.id %}">Отмена</a>
+    </form>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+                {{ message }}
+            </p>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

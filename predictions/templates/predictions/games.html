@@ -1,17 +1,18 @@
 {% extends 'predictions/base.html' %}
 
 {% block content %}
+    
+
     <form method="get">
         <div>
-            <label for="id_name">Хозяева:</label>
-            <select name="name" id="id_name">
-                <option value="">Любая команда</option>
-                {% for team in all_teams %}
-                    <option value="{{ team.name }}" {% if filters.name == team.name %}selected{% endif %}>
-                        {{ team.name }}
-                    </option>
-                {% endfor %}
-            </select>
+            <label for="id_name">Команда (хозяин или гость):</label>
+            <input 
+                type="text" 
+                name="name" 
+                id="id_name" 
+                value="{{ filters.name|default:'' }}" 
+                placeholder="Например: Spa, Ger, Bra"
+            >
         </div>
 
         <div>
@@ -40,7 +41,7 @@
         <ul>
         {% for game in games_list %}
             <li>
-                <strong>{{ game }}</strong> -- {{ game.stage }}
+                <a href="{% url 'predictions:game-detail' game.id %}"><strong>{{ game }}</strong></a> -- {{ game.stage }}
                 <ul>
                     {% for forecast in game.forecast_set.all %}
                         <li>
@@ -54,4 +55,8 @@
     {% else %}
         <p>Матчи не найдены.</p>
     {% endif %}
+
+    <p>
+        <a href="{% url 'predictions:add-game' %}">Добавить новый матч</a>
+    </p>
 {% endblock %}

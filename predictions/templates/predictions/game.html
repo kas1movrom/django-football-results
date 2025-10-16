@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Конкретный матч</title>
+</head>
+<body>
+    {% if messages %}
+        <div style="margin: 10px 0;">
+            {% for message in messages %}
+                <p style="padding: 8px; border-radius: 4px; color: white; background-color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <header>
+        <h1>Матч: {{ game }}</h1>
+    </header>
+
+    <p><strong>Стадия:</strong> {{ game.stage }}</p>
+    <p><strong>Время:</strong> {{ game.game_time }}</p>
+    <p><strong>Стадион:</strong> {{ game.stadium }}</p>
+    {% if game.result %}
+      <p>
+        Результат матча {{ game.result }}
+      </p>
+    {% endif %}
+
+
+    <h3><a href="{% url 'predictions:game-forecasts' game.id %}">Существующие прогнозы</a> ({{ forecasts|length }})</h3>
+    {% if forecasts %}
+        <ul>
+            {% for f in forecasts %}
+                <li>
+                    <strong>{{ f.player }}</strong>: {{ f.result }}
+                    {% if f.doubled %}(Прогноз удвоен){% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Пока нет прогнозов.</p>
+    {% endif %}
+    
+    <p>
+        <a href="{% url 'predictions:edit-game' game.id %}">Редактировать матч</a> |
+        <a href="{% url 'predictions:delete-game-confirm' game.id %}" style="color: red;">Удалить матч</a>
+    </p>
+
+    <footer>
+        <p><a href="{% url 'predictions:games' %}">← Назад к списку матчей</a></p>
+        <p>© 2025</p>
+    </footer>
+</body>
+</html>

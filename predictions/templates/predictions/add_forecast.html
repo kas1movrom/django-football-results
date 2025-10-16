@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Форма для создания прогноза</title>
+</head>
+<body>
+    <header>
+        <h1>Форма для создания прогноза</h1>
+    </header>
+
+    <h2>Добавить прогноз</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Сохранить прогноз</button>
+        <a href="{% url 'predictions:games' %}">Отмена</a>
+    </form>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+                {{ message }}
+            </p>
+        {% endfor %}
+    {% endif %}
+    
+    <footer>
+        <p>© 2025</p>
+    </footer>
+</body>
+</html>
