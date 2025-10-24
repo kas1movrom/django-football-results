@@ -1,0 +1,28 @@
+{% extends 'predictions/base.html' %}
+
+{% block content %}
+    <h1>Мой профиль</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Сохранить</button>
+    </form>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: green;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <p><a href="{% url 'predictions:my-forecasts' %}">Мои прогнозы</a></p>
+    <p><a href="{% url 'index' %}">Назад в главное меню</a></p>
+
+    {% if user.is_authenticated %}
+      <form method="post" action="{% url 'logout' %}" style="display: inline;">
+          {% csrf_token %}
+          <button type="submit">Выйти</button>
+      </form>
+  {% endif %}
+
+{% endblock %}

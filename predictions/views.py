@@ -1,8 +1,12 @@
 """init."""
 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.exceptions import PermissionDenied
 from django.db.models import Q
+from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -12,8 +16,8 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .forms import ForecastForm, GameForm, NationalTeamForm
-from .models import Forecast, Game, NationalTeam
+from .forms import ForecasterProfileForm, ForecastForm, GameForm, NationalTeamForm
+from .models import Forecast, Forecaster, Game, NationalTeam
 
 
 class GameListView(ListView):
@@ -61,7 +65,7 @@ class GameDetailView(DetailView):
         return context
 
 
-class GameCreateView(SuccessMessageMixin, CreateView):
+class GameCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Game
     form_class = GameForm
     template_name = "predictions/add_game.html"
@@ -71,7 +75,7 @@ class GameCreateView(SuccessMessageMixin, CreateView):
         return reverse("predictions:game-detail", kwargs={"game_id": self.object.pk})
 
 
-class GameUpdateView(SuccessMessageMixin, UpdateView):
+class GameUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Game
     form_class = GameForm
     template_name = "predictions/edit_game.html"
@@ -82,7 +86,7 @@ class GameUpdateView(SuccessMessageMixin, UpdateView):
         return reverse("predictions:game-detail", kwargs={"game_id": self.object.pk})
 
 
-class GameDeleteView(SuccessMessageMixin, DeleteView):
+class GameDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Game
     template_name = "predictions/delete_game_confirm.html"
     pk_url_kwarg = "game_id"
@@ -94,7 +98,7 @@ class GameDeleteView(SuccessMessageMixin, DeleteView):
         return super().delete(request, *args, **kwargs)
 
 
-class ForecastCreateView(SuccessMessageMixin, CreateView):
+class ForecastCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Forecast
     form_class = ForecastForm
     template_name = "predictions/add_forecast.html"
@@ -104,12 +108,19 @@ class ForecastCreateView(SuccessMessageMixin, CreateView):
         return reverse("predictions:game-forecasts", kwargs={"game_id": self.object.game.pk})
 
 
-class ForecastUpdateView(SuccessMessageMixin, UpdateView):
+class ForecastUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Forecast
     form_class = ForecastForm
     template_name = "predictions/edit_forecast.html"
     pk_url_kwarg = "forecast_id"
     success_message = "Прогноз обновлён!"
+
+    def get_object(self, queryset=None):
+        forecast = super().get_object(queryset)
+        if forecast.player.user != self.request.user and not self.request.user.is_staff:
+            raise PermissionDenied("Вы не можете редактировать чужие прогнозы.")
+
+        return forecast
 
     def get_success_url(self):
         return reverse(
@@ -117,7 +128,7 @@ class ForecastUpdateView(SuccessMessageMixin, UpdateView):
         )
 
 
-class ForecastDeleteView(SuccessMessageMixin, DeleteView):
+class ForecastDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Forecast
     template_name = "predictions/delete_forecast_confirm.html"
     pk_url_kwarg = "forecast_id"
@@ -125,6 +136,13 @@ class ForecastDeleteView(SuccessMessageMixin, DeleteView):
 
     def get_success_url(self):
         return reverse("predictions:game-forecasts", kwargs={"game_id": self.object.game.pk})
+
+    def get_object(self, queryset=None):
+        forecast = super().get_object(queryset)
+        if forecast.player.user != self.request.user and not self.request.user.is_staff:
+            raise PermissionDenied("Вы не можете удалять чужие прогнозы.")
+
+        return forecast
 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
@@ -169,7 +187,7 @@ class NationalTeamListView(ListView):
     model = NationalTeam
     template_name = "predictions/national_teams.html"
     context_object_name = "national_teams_list"
-    paginate_by = None
+    paginate_by = 5
 
     def get_queryset(self):
         return NationalTeam.objects.all()
@@ -178,7 +196,7 @@ class NationalTeamListView(ListView):
         return super().get_context_data(**kwargs)
 
 
-class NationalTeamCreateView(SuccessMessageMixin, CreateView):
+class NationalTeamCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = NationalTeam
     form_class = NationalTeamForm
     template_name = "predictions/add_national_team.html"
@@ -188,7 +206,7 @@ class NationalTeamCreateView(SuccessMessageMixin, CreateView):
         return reverse("predictions:national-team-detail", kwargs={"national_team_id": self.object.pk})
 
 
-class NationalTeamUpdateView(SuccessMessageMixin, UpdateView):
+class NationalTeamUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = NationalTeam
     form_class = NationalTeamForm
     template_name = "predictions/edit_national_team.html"
@@ -200,7 +218,7 @@ class NationalTeamUpdateView(SuccessMessageMixin, UpdateView):
         return reverse("predictions:national-team-detail", kwargs={"national_team_id": self.object.pk})
 
 
-class NationalTeamDeleteView(SuccessMessageMixin, DeleteView):
+class NationalTeamDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = NationalTeam
     template_name = "predictions/delete_national_team_confirm.html"
     pk_url_kwarg = "national_team_id"
@@ -211,3 +229,26 @@ class NationalTeamDeleteView(SuccessMessageMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
         return super().delete(request, *args, **kwargs)
+
+
+@login_required
+def my_forecasts(request):
+    forecaster = Forecaster.objects.get(user=request.user)
+    return render(request, "predictions/my_forecasts.html", context={"forecasts": forecaster.forecast_set.all()})
+
+
+@login_required
+def forecaster_profile(request):
+    # Получаем или создаём Forecaster для текущего пользователя не создаём
+    forecaster = Forecaster.objects.get(user=request.user)
+
+    if request.method == "POST":
+        form = ForecasterProfileForm(request.POST, instance=forecaster, user=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Ваш профиль успешно обновлён!")
+            return redirect("predictions:forecaster-profile")
+    else:
+        form = ForecasterProfileForm(instance=forecaster, user=request.user)
+
+    return render(request, "predictions/forecaster_profile.html", {"form": form})

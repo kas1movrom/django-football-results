@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Мои прогнозы</title>
+</head>
+<body>
+    {% if messages %}
+        <div style="margin: 10px 0;">
+            {% for message in messages %}
+                <p style="padding: 8px; border-radius: 4px; color: white; background-color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <header>
+        <h1>Мои прогнозы</h1>
+    </header>
+
+    {% if forecasts %}
+        <ul>
+        {% for f in forecasts %}
+            <li>
+                <p>Прогноз: <a href="{% url 'predictions:game-forecast' f.game.id f.id %}">{{ f }}</a></p>
+                <strong>{{ f.player }}</strong>: {{ f.result }}
+                {% if f.doubled %}(Прогноз удвоен){% endif %}
+                <strong>Результат матча: {{ f.game.result }}</strong>
+                <strong>Количество очков: {{ f.points }}</strong>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Прогнозы не найдены.</p>
+    {% endif %}
+    
+    <p>
+      <a href="{% url 'predictions:add-forecast' %}">Добавить новый прогноз на матч</a>
+    </p>
+
+    <footer>
+        <p><a href="{% url 'predictions:forecaster-profile' %}">Назад в профиль</a></p>
+        <p>© 2025</p>
+    </footer>
+</body>
+</html>

@@ -6,6 +6,8 @@ from . import views
 
 app_name = "predictions"
 urlpatterns = [
+    path("forecasts/", views.my_forecasts, name="my-forecasts"),
+    path("profile/", views.forecaster_profile, name="forecaster-profile"),
     path("games/", views.GameListView.as_view(), name="games"),
     path("game/<int:game_id>/", views.GameDetailView.as_view(), name="game-detail"),
     path("game/add/", views.GameCreateView.as_view(), name="add-game"),
