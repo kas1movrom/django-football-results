@@ -4,7 +4,34 @@ import typing
 
 from django import forms
 
-from .models import Forecast, Game, NationalTeam
+from .models import Forecast, Forecaster, Game, NationalTeam
+
+
+class ForecasterProfileForm(forms.ModelForm):
+    # Поля из User
+    username = forms.CharField(max_length=150, disabled=True, help_text="Имя пользователя нельзя изменить")
+    email = forms.EmailField()
+
+    class Meta:
+        model = Forecaster
+        fields = ("first_name", "last_name", "telegram", "mail", "birthday")
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop("user", None)
+        super().__init__(*args, **kwargs)
+        if self.user:
+            self.fields["email"].initial = self.user.email
+            self.fields["username"].initial = self.user.username
+
+    def save(self, commit=True):
+        forecaster = super().save(commit=False)
+        if self.user:
+            self.user.email = self.cleaned_data["email"]
+            if commit:
+                self.user.save()
+        if commit:
+            forecaster.save()
+        return forecaster
 
 
 class GameForm(forms.ModelForm):

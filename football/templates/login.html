@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Страница входа</title>
+</head>
+<body>
+    <h2>Вход</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Войти</button>
+    </form>
+
+    <footer>
+        <p><a href="{% url 'signup' %}">Зарегестрироваться</a></p>
+        <p>© 2025</p>
+    </footer>
+</body>
+</html>

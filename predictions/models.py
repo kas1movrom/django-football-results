@@ -3,6 +3,7 @@
 import functools
 
 from django.contrib import admin
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
@@ -56,6 +57,8 @@ class Forecaster(models.Model):
     mail = models.EmailField()
     admin = models.BooleanField(default=False)
     birthday = models.DateField()
+
+    user = models.OneToOneField(User, blank=True, null=True, on_delete=models.CASCADE)
 
     class Meta:
         constraints = [  # noqa: RUF012

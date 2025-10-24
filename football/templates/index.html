@@ -1,1 +1,11 @@
+{% if messages %}
+    <div style="margin: 10px 0;">
+        {% for message in messages %}
+            <p style="padding: 8px; border-radius: 4px; color: white; background-color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+                {{ message }}
+            </p>
+        {% endfor %}
+    </div>
+{% endif %}
+
 <h1>Hello, {{ who }}!</h1>
