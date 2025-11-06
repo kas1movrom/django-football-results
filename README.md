@@ -26,4 +26,24 @@ Service for making predictions for internetional football events and competition
 * Tests: **unittest**
 * Linter: **ruff**
 
-### Additional Python libraries
+### How to
+#### Clone project from git
+`git clone https://gitlab.digital.mephi.ru/kasimovrom/football-results`
+`cd football-results`
+
+#### Install dependencies with poetry
+`poetry install`
+
+#### Create a python virtual environment
+`python3 -m venv env`
+s`ource env/bin/activate`  # On Windows use `env\Scripts\activate`
+\# Or use `poetry shell`
+
+#### Run migrations
+`python manage.py migrate`
+
+#### Create superuser
+`python manage.py createsuperuser`
+
+#### Run dev server
+`python manage.py runserver`

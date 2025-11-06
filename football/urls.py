@@ -20,8 +20,15 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import include, path
+from rest_framework import routers
 
 from football import views
+from predictions.views import ForecasterViewSet, NationalTeamViewSet
+
+router = routers.DefaultRouter()
+
+router.register(r"national_teams", NationalTeamViewSet)
+router.register(r"forecasters", ForecasterViewSet)
 
 urlpatterns = [
     path("signup/", views.signup_view, name="signup"),
@@ -31,6 +38,8 @@ urlpatterns = [
     path("predictions/", include("predictions.urls")),
     path("admin/", admin.site.urls),
     path("__debug__/", include("debug_toolbar.urls")),
+    path("api/v1/", include(router.urls)),
+    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
 ]
 
 if settings.DEBUG:

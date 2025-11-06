@@ -13,7 +13,8 @@ dependencies = [
     "django-import-export[xlsx] (>=4.3.10,<5.0.0)",
     "django-debug-toolbar (>=6.0.0,<7.0.0)",
     "pillow (>=11.3.0,<12.0.0)",
-    "python-dotenv (>=1.1.1,<2.0.0)"
+    "python-dotenv (>=1.1.1,<2.0.0)",
+    "djangorestframework (>=3.16.1,<4.0.0)"
 ]
 
 [tool.poetry]

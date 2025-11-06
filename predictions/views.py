@@ -1,5 +1,7 @@
 """init."""
 
+import typing
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -15,6 +17,7 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
+from rest_framework import permissions, viewsets
 
 from .forms import (
     ForecasterForm,
@@ -27,8 +30,10 @@ from .forms import (
     TournamentForm,
 )
 from .models import Forecast, Forecaster, Game, NationalTeam, Participation, Stage, Tournament
+from .serializers import ForecasterSerializer, NationalTeamSerializer
 
 
+# TODO: решить эти импорты
 class ForecasterDetailView(DetailView):
     model = Forecaster
     template_name = "predictions/forecaster.html"
@@ -514,3 +519,16 @@ def forecaster_profile(request):
         form = ForecasterProfileForm(instance=forecaster, user=request.user)
 
     return render(request, "predictions/forecaster_profile.html", {"form": form, "forecaster": forecaster})
+
+
+class NationalTeamViewSet(viewsets.ModelViewSet):
+    queryset = NationalTeam.objects.all()
+    serializer_class = NationalTeamSerializer
+    permission_classes: typing.ClassVar = [permissions.IsAuthenticated]
+
+
+# TODO: полностью переделать правила руффа
+class ForecasterViewSet(viewsets.ModelViewSet):
+    queryset = Forecaster.objects.all()
+    serializer_class = ForecasterSerializer
+    permission_classes: typing.ClassVar = [permissions.IsAuthenticated]
