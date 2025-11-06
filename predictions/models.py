@@ -13,6 +13,14 @@ from django.utils.translation import gettext_lazy as _
 # TODO: добавить imagefield (lecture-4)
 # TODO: добавить уникальность на некоторые столбцы (lecture-4)
 # TODO: добавить verbose name (также добавить в Meta) (lecture-4)
+# TODO: добавить все файлы фикстур в .gitignore
+# TODO: нельзя создать матч принадлежащий турниру, в котором участвует командой, которая в турнире не участвует
+# + при выборе можно выбрать только участвующую команду
+# TODO: добавить сущность стадионы (не надписи)
+# TODO: номер группы должен выбираться, не быть одной буквой
+# TODO: нельзя делать несколько прогнозов на одну игру
+# TODO: выбрать победителя через страну, не через название
+# TODO: добавить флаги ко всем сборным
 def validate_game_result(result):
     """Validates result of the game."""
     if "-" in result:
@@ -53,11 +61,11 @@ class Forecaster(models.Model):
     last_name = models.CharField(max_length=20)
 
     # TODO: regexp validation
-    telegram = models.CharField(max_length=50)
+    telegram = models.CharField(max_length=50, blank=True)
     mail = models.EmailField()
     admin = models.BooleanField(default=False)
-    birthday = models.DateField()
-
+    birthday = models.DateField(blank=True, null=True)
+    bio = models.TextField(blank=True, verbose_name="Description")
     user = models.OneToOneField(User, blank=True, null=True, on_delete=models.CASCADE)
 
     class Meta:
@@ -70,9 +78,23 @@ class Forecaster(models.Model):
         return f"{self.first_name} {self.last_name}"
 
 
+class ActivatedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(active=True)
+
+
+class ClosedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(active=False)
+
+
 # TODO: add start and end date of the tournament (dig)
 class Tournament(models.Model):
     """Model for international football tournament."""
+
+    objects = models.Manager()
+    activated = ActivatedManager()
+    closed = ClosedManager()
 
     active = models.BooleanField(default=False)
     year = models.IntegerField(unique=True, validators=[MinValueValidator(2000)])
@@ -170,9 +192,17 @@ class Stage(models.Model):
         return self.get_pretty_number()
 
 
+class FinishedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(status="FN")
+
+
 # TODO: fix ERD diagram (dig)
 class Game(models.Model):
     """Model for a game in the tournament."""
+
+    objects = models.Manager()
+    finished = FinishedManager()
 
     class GameStatus(models.TextChoices):
         NOT_STARTED = "NS", _("Not Started")

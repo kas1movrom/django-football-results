@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Конкретное участие</title>
+</head>
+<body>
+    {% if messages %}
+        <div style="margin: 10px 0;">
+            {% for message in messages %}
+                <p style="padding: 8px; border-radius: 4px; color: white; background-color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <header>
+        <h1>Участник турнира {{ tournament }}</h1>
+    </header>
+
+    <p><a href="{% url 'predictions:forecaster-detail' participation.forecaster.id %}">Данные: <strong>{{ participation.forecaster }}</strong></a></p>
+    <p>Количество очков: {{ participation.points }}</p>
+
+    {% if user.is_staff %}
+      <p>
+          <a href="{% url 'predictions:edit-participation' tournament.id participation.id %}">Редактировать участие</a>
+      </p>
+      <p>
+        <a href="{% url 'predictions:delete-participation' tournament.id participation.id %}">Удалить участие</a>
+      </p>
+    {% endif %}
+
+
+    <footer>
+        <p><a href="{% url 'predictions:tournament-detail' tournament.id %}">← Назад к турниру</a></p>
+        <p>© 2025</p>
+    </footer>
+</body>
+</html>

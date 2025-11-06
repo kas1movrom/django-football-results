@@ -2,7 +2,7 @@
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
@@ -16,8 +16,63 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .forms import ForecasterProfileForm, ForecastForm, GameForm, NationalTeamForm
-from .models import Forecast, Forecaster, Game, NationalTeam
+from .forms import (
+    ForecasterForm,
+    ForecasterProfileForm,
+    ForecastForm,
+    GameForm,
+    NationalTeamForm,
+    ParticipationForm,
+    StageForm,
+    TournamentForm,
+)
+from .models import Forecast, Forecaster, Game, NationalTeam, Participation, Stage, Tournament
+
+
+class ForecasterDetailView(DetailView):
+    model = Forecaster
+    template_name = "predictions/forecaster.html"
+    context_object_name = "forecaster"
+    pk_url_kwarg = "forecaster_id"
+
+
+# TODO: изменить GameDetailView, чтобы отображалсь ссылка обратно на stage
+# TODO: сделать ссылку на добавление стейджа, принадлежащего турниру
+class TournamentDetailView(DetailView):
+    model = Tournament
+    template_name = "predictions/tournament.html"
+    context_object_name = "tournament"
+    pk_url_kwarg = "tournament_id"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["stages_list"] = self.object.stage_set.all()
+        context["participations"] = self.object.participation_set.select_related("forecaster").all()
+        return context
+
+
+class ParticipationDetailView(DetailView):
+    model = Participation
+    template_name = "predictions/participation.html"
+    context_object_name = "participation"
+    pk_url_kwarg = "participation_id"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["tournament"] = Tournament.objects.get(id=self.kwargs.get("tournament_id"))
+        return context
+
+
+class StageDetailView(DetailView):
+    model = Stage
+    template_name = "predictions/stage.html"
+    context_object_name = "stage"
+    pk_url_kwarg = "stage_id"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["games_list"] = self.object.game_set.select_related("owner").select_related("guest").all()
+        return context
 
 
 class GameListView(ListView):
@@ -65,25 +120,239 @@ class GameDetailView(DetailView):
         return context
 
 
-class GameCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class TournamentCreateView(LoginRequiredMixin, SuccessMessageMixin, UserPassesTestMixin, CreateView):
+    model = Tournament
+    form_class = TournamentForm
+    template_name = "predictions/add_tournament.html"
+    success_message = "Турнир успешно создан!"
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def get_success_url(self):
+        return reverse("predictions:tournament-detail", kwargs={"tournament_id": self.object.pk})
+
+
+class ParticipationCreateView(LoginRequiredMixin, SuccessMessageMixin, UserPassesTestMixin, CreateView):
+    model = Participation
+    form_class = ParticipationForm
+    template_name = "predictions/add_participation.html"
+    success_message = "Участие успешно создано!"
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["tournament"] = self.get_tournament()
+        return context
+
+    def get_tournament_id(self):
+        return self.kwargs.get("tournament_id")
+
+    def get_tournament(self):
+        return Tournament.objects.get(id=self.get_tournament_id())
+
+    def get_success_url(self):
+        return reverse(
+            "predictions:participation-detail",
+            kwargs={"participation_id": self.object.pk, "tournament_id": self.get_tournament_id()},
+        )
+
+
+class ForecasterCreateView(LoginRequiredMixin, SuccessMessageMixin, UserPassesTestMixin, CreateView):
+    model = Forecaster
+    form_class = ForecasterForm
+    template_name = "predictions/add_forecaster.html"
+    success_message = "Прогнозист успешно создан!"
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def get_success_url(self):
+        return reverse("predictions:forecaster-detail", kwargs={"forecaster_id": self.object.pk})
+
+
+class StageCreateView(LoginRequiredMixin, SuccessMessageMixin, UserPassesTestMixin, CreateView):
+    model = Stage
+    form_class = StageForm
+    template_name = "predictions/add_stage.html"
+    success_message = "Стейдж успешно создан!"
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def get_success_url(self):
+        return reverse("predictions:stage-detail", kwargs={"stage_id": self.object.pk})
+
+
+class GameCreateView(LoginRequiredMixin, SuccessMessageMixin, UserPassesTestMixin, CreateView):
     model = Game
     form_class = GameForm
     template_name = "predictions/add_game.html"
-    success_message = "Матч %(stadium)s успешно создан!"
+    success_message = "Матч успешно создан!"
+
+    def test_func(self):
+        return self.request.user.is_staff
 
     def get_success_url(self):
         return reverse("predictions:game-detail", kwargs={"game_id": self.object.pk})
 
 
-class GameUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class TournamentUpdateView(LoginRequiredMixin, SuccessMessageMixin, UserPassesTestMixin, UpdateView):
+    model = Tournament
+    form_class = TournamentForm
+    template_name = "predictions/edit_tournament.html"
+    pk_url_kwarg = "tournament_id"
+    success_message = "Турнир успешно обновлен!"
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def get_success_url(self):
+        return reverse("predictions:tournament-detail", kwargs={"tournament_id": self.object.pk})
+
+
+class ParticipationUpdateView(LoginRequiredMixin, SuccessMessageMixin, UserPassesTestMixin, UpdateView):
+    model = Participation
+    form_class = ParticipationForm
+    template_name = "predictions/edit_participation.html"
+    pk_url_kwarg = "participation_id"
+    success_message = "Участие успешно обновлено!"
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["tournament"] = self.get_tournament()
+        return context
+
+    def get_tournament_id(self):
+        return self.kwargs.get("tournament_id")
+
+    def get_tournament(self):
+        return Tournament.objects.get(id=self.get_tournament_id())
+
+    def get_success_url(self):
+        return reverse(
+            "predictions:participation-detail",
+            kwargs={"participation_id": self.object.pk, "tournament_id": self.get_tournament_id()},
+        )
+
+
+class StageUpdateView(LoginRequiredMixin, SuccessMessageMixin, UserPassesTestMixin, UpdateView):
+    model = Stage
+    form_class = StageForm
+    template_name = "predictions/edit_stage.html"
+    pk_url_kwarg = "stage_id"
+    success_message = "Стейдж успешно обновлен!"
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def get_success_url(self):
+        return reverse("predictions:stage-detail", kwargs={"stage_id": self.object.pk})
+
+
+class ForecasterUpdateView(LoginRequiredMixin, SuccessMessageMixin, UserPassesTestMixin, UpdateView):
+    model = Forecaster
+    form_class = ForecasterForm
+    template_name = "predictions/edit_forecaster.html"
+    pk_url_kwarg = "forecaster_id"
+    success_message = "Прогнозист успешно обновлен!"
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def get_success_url(self):
+        return reverse("predictions:forecaster-detail", kwargs={"forecaster_id": self.object.pk})
+
+
+class GameUpdateView(LoginRequiredMixin, SuccessMessageMixin, UserPassesTestMixin, UpdateView):
     model = Game
     form_class = GameForm
     template_name = "predictions/edit_game.html"
     pk_url_kwarg = "game_id"
     success_message = "Матч успешно обновлён!"
 
+    def test_func(self):
+        return self.request.user.is_staff
+
     def get_success_url(self):
         return reverse("predictions:game-detail", kwargs={"game_id": self.object.pk})
+
+
+class TournamentDeleteView(LoginRequiredMixin, SuccessMessageMixin, UserPassesTestMixin, DeleteView):
+    model = Tournament
+    template_name = "predictions/delete_tournament_confirm.html"
+    pk_url_kwarg = "tournament_id"
+    success_message = "Турнир удалён."
+    success_url = reverse_lazy("index")
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super().delete(request, *args, **kwargs)
+
+
+class ParticipationDeleteView(LoginRequiredMixin, SuccessMessageMixin, UserPassesTestMixin, DeleteView):
+    model = Participation
+    template_name = "predictions/delete_participation_confirm.html"
+    pk_url_kwarg = "participation_id"
+    success_message = "Участие удалено"
+    success_url = reverse_lazy("index")
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["tournament"] = self.get_tournament()
+        return context
+
+    def get_tournament_id(self):
+        return self.kwargs.get("tournament_id")
+
+    def get_tournament(self):
+        return Tournament.objects.get(id=self.get_tournament_id())
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super().delete(request, *args, **kwargs)
+
+
+class StageDeleteView(LoginRequiredMixin, SuccessMessageMixin, UserPassesTestMixin, DeleteView):
+    model = Stage
+    template_name = "predictions/delete_stage_confirm.html"
+    pk_url_kwarg = "stage_id"
+    success_message = "Стейдж успешно удален!"
+    success_url = reverse_lazy("index")
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super().delete(request, *args, **kwargs)
+
+
+# TODO: реализовать логику вывода последних n прогнозов (для этого они должны быть в статусе applied)
+class ForecasterDeleteView(LoginRequiredMixin, SuccessMessageMixin, UserPassesTestMixin, DeleteView):
+    model = Forecaster
+    template_name = "predictions/delete_forecaster_confirm.html"
+    pk_url_kwarg = "forecaster_id"
+    success_message = "Прогнозист успешно удалён!"
+    success_url = reverse_lazy("index")
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super().delete(request, *args, **kwargs)
 
 
 class GameDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
@@ -179,21 +448,12 @@ class NationalTeamDetailView(DetailView):
     context_object_name = "national_team"
     pk_url_kwarg = "national_team_id"
 
-    def get_context_data(self, **kwargs):
-        return super().get_context_data(**kwargs)
-
 
 class NationalTeamListView(ListView):
     model = NationalTeam
     template_name = "predictions/national_teams.html"
     context_object_name = "national_teams_list"
     paginate_by = 5
-
-    def get_queryset(self):
-        return NationalTeam.objects.all()
-
-    def get_context_data(self, **kwargs):
-        return super().get_context_data(**kwargs)
 
 
 class NationalTeamCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
@@ -237,6 +497,8 @@ def my_forecasts(request):
     return render(request, "predictions/my_forecasts.html", context={"forecasts": forecaster.forecast_set.all()})
 
 
+# TODO: при изменении почты user-a не меняется почта прогнозиста
+# TODO: здесь получим ошибку сразу при регистрации (т.к пользователь не привяжется к прогнозисту => надо фиксить)
 @login_required
 def forecaster_profile(request):
     # Получаем или создаём Forecaster для текущего пользователя не создаём
@@ -251,4 +513,4 @@ def forecaster_profile(request):
     else:
         form = ForecasterProfileForm(instance=forecaster, user=request.user)
 
-    return render(request, "predictions/forecaster_profile.html", {"form": form})
+    return render(request, "predictions/forecaster_profile.html", {"form": form, "forecaster": forecaster})

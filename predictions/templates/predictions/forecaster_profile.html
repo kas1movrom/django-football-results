@@ -1,7 +1,7 @@
 {% extends 'predictions/base.html' %}
 
 {% block content %}
-    <h1>Мой профиль</h1>
+    <h1>Профиль</h1>
 
     <form method="post">
         {% csrf_token %}
@@ -15,10 +15,13 @@
         {% endfor %}
     {% endif %}
 
-    <p><a href="{% url 'predictions:my-forecasts' %}">Мои прогнозы</a></p>
+    {% if user.forecaster == forecaster %}
+        <p><a href="{% url 'predictions:my-forecasts' %}">Мои прогнозы</a></p>
+    {% endif %}
+
     <p><a href="{% url 'index' %}">Назад в главное меню</a></p>
 
-    {% if user.is_authenticated %}
+    {% if user.is_authenticated and user.forecaster == forecaster %}
       <form method="post" action="{% url 'logout' %}" style="display: inline;">
           {% csrf_token %}
           <button type="submit">Выйти</button>

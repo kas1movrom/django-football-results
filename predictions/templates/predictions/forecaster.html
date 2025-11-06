@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Прогнозист</title>
+</head>
+<body>
+    {% if messages %}
+        <div style="margin: 10px 0;">
+            {% for message in messages %}
+                <p style="padding: 8px; border-radius: 4px; color: white; background-color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <header>
+        <h1>Прогнозист: {{ forecaster }}</h1>
+    </header>
+    <p>День рождения: {{ forecaster.birthday }}</p>
+    <p>Телеграм: {{ forecaster.telegram }}</p>
+    <p>Описание: {{ forecaster.bio }}</p>
+
+    {% if user.is_staff %}
+      <p>
+          <a href="{% url 'predictions:edit-forecaster' forecaster.id %}">Изменить прогнозиста</a>
+      </p>
+      <p>
+          <a href="{% url 'predictions:delete-forecaster' forecaster.id %}">Удалить прогнозиста</a>
+      </p>
+    {% endif %}
+
+    <!-- Здесь должен быть список последних прогнозов прогнозиста (как и в профиле) -->
+    <footer>
+        <p><a href="{% url 'index' %}">← Назад в главное меню</a></p>
+        <p>© 2025</p>
+    </footer>
+</body>
+</html>

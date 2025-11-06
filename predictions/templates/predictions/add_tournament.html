@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Форма для создания турнира</title>
+</head>
+<body>
+    <header>
+        <h1>Форма для создания турнира</h1>
+    </header>
+
+    <h2>Добавить новый турнир</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Создать турнир</button>
+        <a href="{% url 'index' %}">Отмена</a>
+    </form>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+                {{ message }}
+            </p>
+        {% endfor %}
+    {% endif %}
+    
+    <footer>
+        <p>© 2025</p>
+    </footer>
+</body>
+</html>

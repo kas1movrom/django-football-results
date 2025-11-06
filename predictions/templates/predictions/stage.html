@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Конкретная стадия</title>
+</head>
+<body>
+    {% if messages %}
+        <div style="margin: 10px 0;">
+            {% for message in messages %}
+                <p style="padding: 8px; border-radius: 4px; color: white; background-color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- stage -->
+    <header>
+        <h1>Стадия: {{ stage }}</h1>
+    </header>
+
+    <!-- games_list -->
+   {% if games_list %}
+        <ul>
+        {% for game in games_list %}
+            <li>
+                <a href="{% url 'predictions:game-detail' game.id %}"><strong>{{ game }}</strong></a> -- {{ game.stage }}
+                <ul>
+                    {% for forecast in game.forecast_set.all %}
+                        <li>
+                            {{ forecast }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Матчи не найдены.</p>
+    {% endif %}
+
+    {% if user.is_staff %}
+      <p>
+          <a href="{% url 'predictions:edit-stage' stage.id %}">Редактировать стадию</a>
+      </p>
+      <p>
+        <a href="{% url 'predictions:delete-stage' stage.id %}">Удалить стадию</a>
+      </p>
+    {% endif %}
+
+
+    <footer>
+        <p><a href="{% url 'index' %}">← Назад в главное меню</a></p>
+        <p>© 2025</p>
+    </footer>
+</body>
+</html>

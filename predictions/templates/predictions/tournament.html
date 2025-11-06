@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Конкретный турнир</title>
+</head>
+<body>
+    {% if messages %}
+        <div style="margin: 10px 0;">
+            {% for message in messages %}
+                <p style="padding: 8px; border-radius: 4px; color: white; background-color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- tournament -->
+    <header>
+        <h1>Турнир: {{ tournament }}</h1>
+    </header>
+
+    <!-- stages_list -->
+    <p>Список этапов турнира</p>
+    {% if stages_list %}
+        <ul>
+        {% for stage in stages_list %}
+            <li>
+                <a href="{% url 'predictions:stage-detail' stage.id %}"><strong>{{ stage }}</strong></a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Стадии не найдены.</p>
+    {% endif %}
+
+    <!-- добавить участников в контекст -->
+    <p>Список участников</p>
+    {% if participations %}
+        <ul>
+            {% for participation in participations %}
+                <li>
+                    <a href="{% url 'predictions:participation-detail' tournament.id participation.id %}"><strong>{{ participation }}</strong></a> -- {{ participation.forecaster }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Участники не найдены</p>
+    {% endif %}
+
+    {% if user.is_staff %}
+      <p>
+          <a href="{% url 'predictions:edit-tournament' tournament.id %}">Редактировать турнир</a> |
+          <a href="{% url 'predictions:delete-tournament' tournament.id %}" style="color: red;">Удалить турнир</a>
+      </p>
+      <p>
+        <a href="{% url 'predictions:add-stage' %}">Добавить стейдж в турнир</a>
+      </p>
+      <p>
+        <a href="{% url 'predictions:add-participation' tournament.id %}">Добавить участие в турнир</a>
+      </p>
+    {% endif %}
+
+    <!-- здесь нужно сделать ссылку на добавление участников в турнир -->
+    <!-- здесь нужно ссылку на добавление стейджей в турнир-->
+    <footer>
+        <p><a href="{% url 'index' %}">← Назад в главное меню</a></p>
+        <p>© 2025</p>
+    </footer>
+</body>
+</html>

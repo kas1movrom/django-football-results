@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
+from predictions.models import Forecaster, Tournament
+
 from .forms import LoginForm, SignUpForm
 
 
@@ -38,10 +40,16 @@ def login_view(request):
 @login_required
 def index(request):
     """/ path. Returns Hello, Forecasters."""
+    active_tournaments = Tournament.activated.all()
+    closed_tournaments = Tournament.closed.all()
+    forecasters = Forecaster.objects.all()
     return render(
         request,
         "index.html",
         context={
             "who": "Forecaster",
+            "forecasters": forecasters,
+            "closed_tournaments": closed_tournaments,
+            "active_tournaments": active_tournaments,
         },
     )

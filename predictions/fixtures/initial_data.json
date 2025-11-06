@@ -6,7 +6,8 @@
     "world_cup_count": 4,
     "name": "Germany",
     "mainland": "Europe",
-    "main_color": "White"
+    "main_color": "White",
+    "flag": ""
   }
 },
 {
@@ -16,7 +17,8 @@
     "world_cup_count": 5,
     "name": "Brazil",
     "mainland": "South America",
-    "main_color": "Yellow"
+    "main_color": "Yellow",
+    "flag": ""
   }
 },
 {
@@ -26,7 +28,8 @@
     "world_cup_count": 4,
     "name": "Italy",
     "mainland": "Europe",
-    "main_color": "Blue"
+    "main_color": "Blue",
+    "flag": ""
   }
 },
 {
@@ -36,7 +39,8 @@
     "world_cup_count": 3,
     "name": "Argentina",
     "mainland": "South America",
-    "main_color": "Blue-White"
+    "main_color": "Blue-White",
+    "flag": ""
   }
 },
 {
@@ -46,7 +50,8 @@
     "world_cup_count": 2,
     "name": "Urugway",
     "mainland": "South America",
-    "main_color": "White-Blue"
+    "main_color": "White-Blue",
+    "flag": ""
   }
 },
 {
@@ -56,7 +61,8 @@
     "world_cup_count": 2,
     "name": "France",
     "mainland": "Europe",
-    "main_color": "Blue"
+    "main_color": "Blue",
+    "flag": ""
   }
 },
 {
@@ -66,7 +72,8 @@
     "world_cup_count": 1,
     "name": "England",
     "mainland": "Europe",
-    "main_color": "White"
+    "main_color": "White",
+    "flag": ""
   }
 },
 {
@@ -76,7 +83,8 @@
     "world_cup_count": 1,
     "name": "Spain",
     "mainland": "Europe",
-    "main_color": "Red"
+    "main_color": "Red",
+    "flag": ""
   }
 },
 {
@@ -86,7 +94,8 @@
     "world_cup_count": 0,
     "name": "Portugal",
     "mainland": "Europe",
-    "main_color": "Red-Green"
+    "main_color": "Red-Green",
+    "flag": ""
   }
 },
 {
@@ -96,7 +105,8 @@
     "world_cup_count": 0,
     "name": "Netherlands",
     "mainland": "Europe",
-    "main_color": "Orange"
+    "main_color": "Orange",
+    "flag": "flags/Flag_of_the_Netherlands.svg.png"
   }
 },
 {
@@ -106,7 +116,8 @@
     "world_cup_count": 0,
     "name": "Russia",
     "mainland": "Asia",
-    "main_color": "Red"
+    "main_color": "Red",
+    "flag": ""
   }
 },
 {
@@ -116,7 +127,8 @@
     "world_cup_count": 0,
     "name": "Turkey",
     "mainland": "Europe",
-    "main_color": "Red"
+    "main_color": "Red",
+    "flag": ""
   }
 },
 {
@@ -126,17 +138,8 @@
     "world_cup_count": 0,
     "name": "USA",
     "mainland": "North America",
-    "main_color": "White"
-  }
-},
-{
-  "model": "predictions.nationalteam",
-  "pk": 14,
-  "fields": {
-    "world_cup_count": 0,
-    "name": "Chile",
-    "mainland": "South America",
-    "main_color": "Red"
+    "main_color": "White",
+    "flag": ""
   }
 },
 {
@@ -146,7 +149,8 @@
     "world_cup_count": 0,
     "name": "Egypt",
     "mainland": "Africa",
-    "main_color": "White"
+    "main_color": "White",
+    "flag": ""
   }
 },
 {
@@ -156,7 +160,8 @@
     "world_cup_count": 0,
     "name": "Australia",
     "mainland": "Australia",
-    "main_color": "Yellow"
+    "main_color": "Yellow",
+    "flag": ""
   }
 },
 {
@@ -166,7 +171,8 @@
     "world_cup_count": 0,
     "name": "Ukraine",
     "mainland": "Europe",
-    "main_color": "Yellow-Blue"
+    "main_color": "Yellow-Blue",
+    "flag": "flags/Flag_of_Ukraine.svg.png"
   }
 },
 {
@@ -176,7 +182,19 @@
     "world_cup_count": 0,
     "name": "Mexico",
     "mainland": "North America",
-    "main_color": "Green"
+    "main_color": "Green",
+    "flag": "flags/Flag_of_Mexico.svg.png"
+  }
+},
+{
+  "model": "predictions.nationalteam",
+  "pk": 20,
+  "fields": {
+    "world_cup_count": 0,
+    "name": "Morocco",
+    "mainland": "Africa",
+    "main_color": "Red",
+    "flag": "flags/Flag_of_Morocco.svg.png"
   }
 },
 {
@@ -185,10 +203,12 @@
   "fields": {
     "first_name": "Roman",
     "last_name": "Kasimov",
-    "telegram": "@kasimovrom",
+    "telegram": "@kasimovroma",
     "mail": "romkasrm11832@gmail.com",
     "admin": true,
-    "birthday": "2004-09-25"
+    "birthday": "2004-09-25",
+    "bio": "Kasimov Roman Elmirovich",
+    "user": 1
   }
 },
 {
@@ -200,7 +220,23 @@
     "telegram": "@ggplx",
     "mail": "ren4ikas@gmail.com",
     "admin": true,
-    "birthday": "2000-07-19"
+    "birthday": "2000-07-19",
+    "bio": "",
+    "user": 3
+  }
+},
+{
+  "model": "predictions.forecaster",
+  "pk": 3,
+  "fields": {
+    "first_name": "Dmitriy",
+    "last_name": "Devyatko",
+    "telegram": "@dev9tos",
+    "mail": "dev9mm@mail.ru",
+    "admin": false,
+    "birthday": "2000-10-22",
+    "bio": "",
+    "user": 4
   }
 },
 {
@@ -211,7 +247,7 @@
     "year": 2018,
     "place": "Russia",
     "teams_count": 16,
-    "winner": "France",
+    "winner": "Germany",
     "start_date": "2018-06-23",
     "finish_date": "2018-07-23",
     "national_teams": [
@@ -228,9 +264,40 @@
       11,
       12,
       13,
-      14,
       15,
-      16
+      20,
+      17
+    ]
+  }
+},
+{
+  "model": "predictions.tournament",
+  "pk": 2,
+  "fields": {
+    "active": true,
+    "year": 2022,
+    "place": "Quatar",
+    "teams_count": 16,
+    "winner": "",
+    "start_date": "2025-11-26",
+    "finish_date": "2025-12-26",
+    "national_teams": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9,
+      5,
+      10,
+      11,
+      12,
+      13,
+      15,
+      16,
+      18
     ]
   }
 },
@@ -240,7 +307,7 @@
   "fields": {
     "forecaster": 1,
     "tournament": 1,
-    "points": 0,
+    "points": 48,
     "register_time": "2025-09-23T22:46:02.371Z"
   }
 },
@@ -250,8 +317,38 @@
   "fields": {
     "forecaster": 2,
     "tournament": 1,
-    "points": 0,
+    "points": 55,
     "register_time": "2025-09-23T22:46:09.798Z"
+  }
+},
+{
+  "model": "predictions.participation",
+  "pk": 3,
+  "fields": {
+    "forecaster": 2,
+    "tournament": 2,
+    "points": 0,
+    "register_time": "2025-10-26T10:59:13.891Z"
+  }
+},
+{
+  "model": "predictions.participation",
+  "pk": 4,
+  "fields": {
+    "forecaster": 1,
+    "tournament": 2,
+    "points": 0,
+    "register_time": "2025-10-26T10:59:13.891Z"
+  }
+},
+{
+  "model": "predictions.participation",
+  "pk": 5,
+  "fields": {
+    "forecaster": 3,
+    "tournament": 2,
+    "points": 0,
+    "register_time": "2025-10-26T10:59:13.892Z"
   }
 },
 {
@@ -264,6 +361,138 @@
     "tournament": 1,
     "start_date": "2018-06-23",
     "finish_date": "2018-06-30"
+  }
+},
+{
+  "model": "predictions.stage",
+  "pk": 2,
+  "fields": {
+    "status": "CL",
+    "st_type": "GR",
+    "number": 2,
+    "tournament": 1,
+    "start_date": "2018-06-30",
+    "finish_date": "2018-07-06"
+  }
+},
+{
+  "model": "predictions.stage",
+  "pk": 3,
+  "fields": {
+    "status": "CL",
+    "st_type": "GR",
+    "number": 3,
+    "tournament": 1,
+    "start_date": "2018-07-06",
+    "finish_date": "2018-07-13"
+  }
+},
+{
+  "model": "predictions.stage",
+  "pk": 4,
+  "fields": {
+    "status": "CL",
+    "st_type": "PL",
+    "number": 4,
+    "tournament": 1,
+    "start_date": "2018-07-14",
+    "finish_date": "2018-07-18"
+  }
+},
+{
+  "model": "predictions.stage",
+  "pk": 5,
+  "fields": {
+    "status": "CL",
+    "st_type": "PL",
+    "number": 2,
+    "tournament": 1,
+    "start_date": "2018-07-18",
+    "finish_date": "2018-07-20"
+  }
+},
+{
+  "model": "predictions.stage",
+  "pk": 6,
+  "fields": {
+    "status": "CL",
+    "st_type": "PL",
+    "number": 1,
+    "tournament": 1,
+    "start_date": "2018-07-21",
+    "finish_date": "2018-07-21"
+  }
+},
+{
+  "model": "predictions.stage",
+  "pk": 7,
+  "fields": {
+    "status": "OP",
+    "st_type": "GR",
+    "number": 1,
+    "tournament": 2,
+    "start_date": "2025-11-26",
+    "finish_date": "2025-12-01"
+  }
+},
+{
+  "model": "predictions.stage",
+  "pk": 8,
+  "fields": {
+    "status": "CL",
+    "st_type": "GR",
+    "number": 2,
+    "tournament": 2,
+    "start_date": "2025-12-01",
+    "finish_date": "2025-12-08"
+  }
+},
+{
+  "model": "predictions.stage",
+  "pk": 9,
+  "fields": {
+    "status": "CL",
+    "st_type": "GR",
+    "number": 3,
+    "tournament": 2,
+    "start_date": "2025-12-08",
+    "finish_date": "2025-12-15"
+  }
+},
+{
+  "model": "predictions.stage",
+  "pk": 10,
+  "fields": {
+    "status": "CL",
+    "st_type": "PL",
+    "number": 4,
+    "tournament": 2,
+    "start_date": "2025-12-15",
+    "finish_date": "2025-12-20"
+  }
+},
+{
+  "model": "predictions.stage",
+  "pk": 11,
+  "fields": {
+    "status": "CL",
+    "st_type": "PL",
+    "number": 2,
+    "tournament": 2,
+    "start_date": "2025-12-20",
+    "finish_date": "2025-12-25"
+  }
+},
+{
+  "model": "predictions.stage",
+  "pk": 12,
+  "fields": {
+    "status": "CL",
+    "st_type": "PL",
+    "number": 1,
+    "tournament": 2,
+    "start_date": "2025-12-25",
+    "finish_date": "2025-12-26"
   }
 },
 {
@@ -324,6 +553,531 @@
     "stage": 1,
     "owner": 10,
     "guest": 12
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 7,
+  "fields": {
+    "stadium": "Rostov Arena",
+    "game_time": "2018-06-25T09:47:28Z",
+    "number": "C",
+    "status": "FN",
+    "result": "1-2",
+    "all_result": "1-2",
+    "stage": 1,
+    "owner": 13,
+    "guest": 17
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 8,
+  "fields": {
+    "stadium": "Luzhniki",
+    "game_time": "2018-06-27T09:36:54Z",
+    "number": "C",
+    "status": "FN",
+    "result": "3-3",
+    "all_result": "3-3",
+    "stage": 1,
+    "owner": 4,
+    "guest": 6
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 9,
+  "fields": {
+    "stadium": "KazanArena",
+    "game_time": "2018-06-28T09:45:19Z",
+    "number": "D",
+    "status": "FN",
+    "result": "2-1",
+    "all_result": "2-1",
+    "stage": 1,
+    "owner": 2,
+    "guest": 11
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 10,
+  "fields": {
+    "stadium": "Otkrytie Arena",
+    "game_time": "2018-06-29T09:46:26Z",
+    "number": "D",
+    "status": "FN",
+    "result": "0-0",
+    "all_result": "0-0",
+    "stage": 1,
+    "owner": 15,
+    "guest": 20
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 11,
+  "fields": {
+    "stadium": "Luzhniki",
+    "game_time": "2018-07-01T09:48:27Z",
+    "number": "A",
+    "status": "FN",
+    "result": "2-2",
+    "all_result": "2-2",
+    "stage": 2,
+    "owner": 3,
+    "guest": 8
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 12,
+  "fields": {
+    "stadium": "GazProm Arena",
+    "game_time": "2018-07-01T09:50:27Z",
+    "number": "A",
+    "status": "FN",
+    "result": "0-2",
+    "all_result": "0-2",
+    "stage": 2,
+    "owner": 5,
+    "guest": 9
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 13,
+  "fields": {
+    "stadium": "Rostov Arena",
+    "game_time": "2018-07-03T09:51:43Z",
+    "number": "B",
+    "status": "FN",
+    "result": "3-0",
+    "all_result": "3-0",
+    "stage": 2,
+    "owner": 7,
+    "guest": 12
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 14,
+  "fields": {
+    "stadium": "Kaliningrad Arena",
+    "game_time": "2018-07-04T09:53:04Z",
+    "number": "B",
+    "status": "FN",
+    "result": "4-4",
+    "all_result": "4-4",
+    "stage": 2,
+    "owner": 10,
+    "guest": 1
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 15,
+  "fields": {
+    "stadium": "Luzhniki",
+    "game_time": "2018-07-04T09:55:17Z",
+    "number": "C",
+    "status": "FN",
+    "result": "0-4",
+    "all_result": "0-4",
+    "stage": 2,
+    "owner": 13,
+    "guest": 6
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 16,
+  "fields": {
+    "stadium": "Kazan Arena",
+    "game_time": "2018-07-04T09:58:58Z",
+    "number": "С",
+    "status": "FN",
+    "result": "1-1",
+    "all_result": "1-1",
+    "stage": 2,
+    "owner": 4,
+    "guest": 17
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 17,
+  "fields": {
+    "stadium": "Otkrytie Arena",
+    "game_time": "2018-07-05T10:00:06Z",
+    "number": "D",
+    "status": "FN",
+    "result": "2-1",
+    "all_result": "2-1",
+    "stage": 2,
+    "owner": 2,
+    "guest": 15
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 18,
+  "fields": {
+    "stadium": "Gazprom Arena",
+    "game_time": "2018-07-06T10:01:06Z",
+    "number": "D",
+    "status": "FN",
+    "result": "2-0",
+    "all_result": "2-0",
+    "stage": 2,
+    "owner": 11,
+    "guest": 20
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 19,
+  "fields": {
+    "stadium": "Luzhniki",
+    "game_time": "2018-07-08T10:05:22Z",
+    "number": "A",
+    "status": "FN",
+    "result": "2-2",
+    "all_result": "2-2",
+    "stage": 3,
+    "owner": 8,
+    "guest": 9
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 20,
+  "fields": {
+    "stadium": "GazProm Arena",
+    "game_time": "2018-07-08T10:07:17Z",
+    "number": "A",
+    "status": "FN",
+    "result": "0-1",
+    "all_result": "0-1",
+    "stage": 3,
+    "owner": 5,
+    "guest": 3
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 21,
+  "fields": {
+    "stadium": "Otkrytie Arena",
+    "game_time": "2018-07-08T10:08:16Z",
+    "number": "B",
+    "status": "FN",
+    "result": "2-2",
+    "all_result": "2-2",
+    "stage": 3,
+    "owner": 7,
+    "guest": 10
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 22,
+  "fields": {
+    "stadium": "Rostov Arena",
+    "game_time": "2018-07-09T10:09:24Z",
+    "number": "B",
+    "status": "FN",
+    "result": "2-3",
+    "all_result": "2-3",
+    "stage": 3,
+    "owner": 1,
+    "guest": 12
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 23,
+  "fields": {
+    "stadium": "Kaliningrad Arena",
+    "game_time": "2018-07-10T10:13:36Z",
+    "number": "C",
+    "status": "FN",
+    "result": "0-2",
+    "all_result": "0-2",
+    "stage": 3,
+    "owner": 4,
+    "guest": 13
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 24,
+  "fields": {
+    "stadium": "Kazan Arena",
+    "game_time": "2018-07-11T10:16:30Z",
+    "number": "C",
+    "status": "FN",
+    "result": "1-2",
+    "all_result": "1-2",
+    "stage": 3,
+    "owner": 17,
+    "guest": 6
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 26,
+  "fields": {
+    "stadium": "Luzhniki",
+    "game_time": "2018-07-12T10:19:14Z",
+    "number": "D",
+    "status": "FN",
+    "result": "1-4",
+    "all_result": "1-4",
+    "stage": 3,
+    "owner": 20,
+    "guest": 2
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 27,
+  "fields": {
+    "stadium": "Kazan Arena",
+    "game_time": "2018-07-13T10:20:09Z",
+    "number": "D",
+    "status": "FN",
+    "result": "1-2",
+    "all_result": "1-2",
+    "stage": 3,
+    "owner": 15,
+    "guest": 11
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 28,
+  "fields": {
+    "stadium": "Luzhniki",
+    "game_time": "2018-07-14T10:38:40Z",
+    "number": "1",
+    "status": "FN",
+    "result": "0-2",
+    "all_result": "0-2",
+    "stage": 4,
+    "owner": 3,
+    "guest": 1
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 29,
+  "fields": {
+    "stadium": "GazProm Arena",
+    "game_time": "2018-07-15T10:38:58Z",
+    "number": "2",
+    "status": "FN",
+    "result": "1-3",
+    "all_result": "1-3",
+    "stage": 4,
+    "owner": 17,
+    "guest": 2
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 30,
+  "fields": {
+    "stadium": "Kazan Arena",
+    "game_time": "2018-07-16T10:38:59Z",
+    "number": "3",
+    "status": "FN",
+    "result": "2-2",
+    "all_result": "2(3)-2(5)",
+    "stage": 4,
+    "owner": 8,
+    "guest": 10
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 31,
+  "fields": {
+    "stadium": "Rostov Arena",
+    "game_time": "2018-07-17T10:39:01Z",
+    "number": "4",
+    "status": "FN",
+    "result": "0-1",
+    "all_result": "0-1",
+    "stage": 4,
+    "owner": 11,
+    "guest": 6
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 32,
+  "fields": {
+    "stadium": "Luzhniki",
+    "game_time": "2018-07-18T10:44:24Z",
+    "number": "1",
+    "status": "FN",
+    "result": "7-1",
+    "all_result": "7-1",
+    "stage": 5,
+    "owner": 1,
+    "guest": 2
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 33,
+  "fields": {
+    "stadium": "GazProm Arena",
+    "game_time": "2018-07-19T10:44:26Z",
+    "number": "2",
+    "status": "FN",
+    "result": "1-1",
+    "all_result": "1(2)-1(4)",
+    "stage": 5,
+    "owner": 10,
+    "guest": 6
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 34,
+  "fields": {
+    "stadium": "Luzhniki",
+    "game_time": "2018-07-21T10:44:54Z",
+    "number": "1",
+    "status": "FN",
+    "result": "2-0",
+    "all_result": "2-0",
+    "stage": 6,
+    "owner": 1,
+    "guest": 6
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 35,
+  "fields": {
+    "stadium": "Ahli",
+    "game_time": "2025-11-26T11:03:12Z",
+    "number": "A",
+    "status": "NS",
+    "result": "",
+    "all_result": "",
+    "stage": 7,
+    "owner": 8,
+    "guest": 2
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 36,
+  "fields": {
+    "stadium": "All",
+    "game_time": "2025-11-27T11:04:06Z",
+    "number": "A",
+    "status": "NS",
+    "result": "",
+    "all_result": "",
+    "stage": 7,
+    "owner": 7,
+    "guest": 13
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 37,
+  "fields": {
+    "stadium": "Ahli",
+    "game_time": "2025-11-28T11:05:11Z",
+    "number": "B",
+    "status": "NS",
+    "result": "",
+    "all_result": "",
+    "stage": 7,
+    "owner": 1,
+    "guest": 5
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 38,
+  "fields": {
+    "stadium": "All",
+    "game_time": "2025-11-29T11:05:19Z",
+    "number": "B",
+    "status": "NS",
+    "result": "",
+    "all_result": "",
+    "stage": 7,
+    "owner": 16,
+    "guest": 11
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 39,
+  "fields": {
+    "stadium": "Bazir",
+    "game_time": "2025-11-29T11:05:58Z",
+    "number": "C",
+    "status": "NS",
+    "result": "",
+    "all_result": "",
+    "stage": 7,
+    "owner": 9,
+    "guest": 10
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 40,
+  "fields": {
+    "stadium": "Zamir",
+    "game_time": "2025-11-30T11:06:56Z",
+    "number": "C",
+    "status": "NS",
+    "result": "",
+    "all_result": "",
+    "stage": 7,
+    "owner": 4,
+    "guest": 18
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 41,
+  "fields": {
+    "stadium": "Ahli",
+    "game_time": "2025-11-30T11:08:30Z",
+    "number": "D",
+    "status": "NS",
+    "result": "",
+    "all_result": "",
+    "stage": 7,
+    "owner": 12,
+    "guest": 3
+  }
+},
+{
+  "model": "predictions.game",
+  "pk": 42,
+  "fields": {
+    "stadium": "All",
+    "game_time": "2025-12-01T11:09:00Z",
+    "number": "D",
+    "status": "NS",
+    "result": "",
+    "all_result": "",
+    "stage": 7,
+    "owner": 15,
+    "guest": 6
   }
 },
 {
@@ -420,6 +1174,654 @@
     "status": "SV",
     "player": 2,
     "game": 4
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 12,
+  "fields": {
+    "doubled": false,
+    "result": "4-1",
+    "register_date": "2025-10-10T13:32:24.066Z",
+    "status": "SV",
+    "player": 1,
+    "game": 7
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 13,
+  "fields": {
+    "doubled": false,
+    "result": "2-3",
+    "register_date": "2025-10-16T16:33:18.433Z",
+    "status": "SV",
+    "player": 2,
+    "game": 7
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 14,
+  "fields": {
+    "doubled": false,
+    "result": "2-3",
+    "register_date": "2025-10-26T09:39:04.142Z",
+    "status": "SV",
+    "player": 2,
+    "game": 8
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 15,
+  "fields": {
+    "doubled": false,
+    "result": "1-1",
+    "register_date": "2025-10-26T09:39:04.143Z",
+    "status": "SV",
+    "player": 1,
+    "game": 8
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 16,
+  "fields": {
+    "doubled": false,
+    "result": "3-0",
+    "register_date": "2025-10-26T09:46:04.199Z",
+    "status": "SV",
+    "player": 2,
+    "game": 9
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 17,
+  "fields": {
+    "doubled": false,
+    "result": "2-0",
+    "register_date": "2025-10-26T09:46:04.200Z",
+    "status": "SV",
+    "player": 1,
+    "game": 9
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 18,
+  "fields": {
+    "doubled": false,
+    "result": "1-1",
+    "register_date": "2025-10-26T09:47:14.367Z",
+    "status": "SV",
+    "player": 1,
+    "game": 10
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 19,
+  "fields": {
+    "doubled": false,
+    "result": "0-0",
+    "register_date": "2025-10-26T09:47:14.368Z",
+    "status": "SV",
+    "player": 2,
+    "game": 10
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 20,
+  "fields": {
+    "doubled": false,
+    "result": "1-3",
+    "register_date": "2025-10-26T09:49:28.354Z",
+    "status": "SV",
+    "player": 1,
+    "game": 11
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 21,
+  "fields": {
+    "doubled": false,
+    "result": "1-1",
+    "register_date": "2025-10-26T09:49:28.356Z",
+    "status": "SV",
+    "player": 2,
+    "game": 11
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 22,
+  "fields": {
+    "doubled": false,
+    "result": "0-1",
+    "register_date": "2025-10-26T09:51:26.371Z",
+    "status": "SV",
+    "player": 2,
+    "game": 12
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 23,
+  "fields": {
+    "doubled": true,
+    "result": "1-3",
+    "register_date": "2025-10-26T09:51:26.371Z",
+    "status": "SV",
+    "player": 1,
+    "game": 12
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 24,
+  "fields": {
+    "doubled": false,
+    "result": "2-0",
+    "register_date": "2025-10-26T09:52:39.448Z",
+    "status": "SV",
+    "player": 2,
+    "game": 13
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 25,
+  "fields": {
+    "doubled": false,
+    "result": "3-0",
+    "register_date": "2025-10-26T09:52:39.449Z",
+    "status": "SV",
+    "player": 1,
+    "game": 13
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 26,
+  "fields": {
+    "doubled": true,
+    "result": "1-1",
+    "register_date": "2025-10-26T09:54:20.999Z",
+    "status": "SV",
+    "player": 2,
+    "game": 14
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 27,
+  "fields": {
+    "doubled": false,
+    "result": "0-1",
+    "register_date": "2025-10-26T09:54:21.000Z",
+    "status": "SV",
+    "player": 1,
+    "game": 14
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 28,
+  "fields": {
+    "doubled": false,
+    "result": "0-3",
+    "register_date": "2025-10-26T09:55:46.905Z",
+    "status": "SV",
+    "player": 2,
+    "game": 15
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 29,
+  "fields": {
+    "doubled": false,
+    "result": "0-1",
+    "register_date": "2025-10-26T09:55:46.906Z",
+    "status": "SV",
+    "player": 1,
+    "game": 15
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 30,
+  "fields": {
+    "doubled": false,
+    "result": "2-0",
+    "register_date": "2025-10-26T09:59:00.877Z",
+    "status": "SV",
+    "player": 2,
+    "game": 16
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 31,
+  "fields": {
+    "doubled": false,
+    "result": "3-0",
+    "register_date": "2025-10-26T09:59:00.878Z",
+    "status": "SV",
+    "player": 1,
+    "game": 16
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 32,
+  "fields": {
+    "doubled": false,
+    "result": "2-1",
+    "register_date": "2025-10-26T10:00:45.482Z",
+    "status": "SV",
+    "player": 2,
+    "game": 17
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 33,
+  "fields": {
+    "doubled": false,
+    "result": "3-1",
+    "register_date": "2025-10-26T10:00:45.483Z",
+    "status": "SV",
+    "player": 1,
+    "game": 17
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 34,
+  "fields": {
+    "doubled": false,
+    "result": "0-1",
+    "register_date": "2025-10-26T10:01:48.059Z",
+    "status": "SV",
+    "player": 1,
+    "game": 18
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 35,
+  "fields": {
+    "doubled": false,
+    "result": "0-3",
+    "register_date": "2025-10-26T10:01:48.060Z",
+    "status": "SV",
+    "player": 2,
+    "game": 18
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 36,
+  "fields": {
+    "doubled": false,
+    "result": "2-1",
+    "register_date": "2025-10-26T10:07:03.489Z",
+    "status": "SV",
+    "player": 2,
+    "game": 19
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 37,
+  "fields": {
+    "doubled": false,
+    "result": "0-1",
+    "register_date": "2025-10-26T10:07:03.490Z",
+    "status": "SV",
+    "player": 1,
+    "game": 19
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 38,
+  "fields": {
+    "doubled": false,
+    "result": "0-2",
+    "register_date": "2025-10-26T10:07:53.367Z",
+    "status": "SV",
+    "player": 1,
+    "game": 20
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 39,
+  "fields": {
+    "doubled": false,
+    "result": "1-3",
+    "register_date": "2025-10-26T10:07:53.368Z",
+    "status": "SV",
+    "player": 2,
+    "game": 20
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 40,
+  "fields": {
+    "doubled": true,
+    "result": "1-1",
+    "register_date": "2025-10-26T10:09:06.885Z",
+    "status": "SV",
+    "player": 1,
+    "game": 21
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 41,
+  "fields": {
+    "doubled": true,
+    "result": "2-2",
+    "register_date": "2025-10-26T10:09:06.886Z",
+    "status": "SV",
+    "player": 2,
+    "game": 21
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 42,
+  "fields": {
+    "doubled": false,
+    "result": "2-0",
+    "register_date": "2025-10-26T10:10:06.866Z",
+    "status": "SV",
+    "player": 1,
+    "game": 22
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 43,
+  "fields": {
+    "doubled": false,
+    "result": "1-1",
+    "register_date": "2025-10-26T10:10:06.867Z",
+    "status": "SV",
+    "player": 2,
+    "game": 22
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 44,
+  "fields": {
+    "doubled": false,
+    "result": "0-2",
+    "register_date": "2025-10-26T10:16:12.888Z",
+    "status": "SV",
+    "player": 2,
+    "game": 23
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 45,
+  "fields": {
+    "doubled": false,
+    "result": "0-1",
+    "register_date": "2025-10-26T10:16:12.889Z",
+    "status": "SV",
+    "player": 1,
+    "game": 23
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 46,
+  "fields": {
+    "doubled": false,
+    "result": "0-1",
+    "register_date": "2025-10-26T10:17:15.987Z",
+    "status": "SV",
+    "player": 1,
+    "game": 24
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 47,
+  "fields": {
+    "doubled": false,
+    "result": "1-3",
+    "register_date": "2025-10-26T10:17:15.988Z",
+    "status": "SV",
+    "player": 2,
+    "game": 24
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 50,
+  "fields": {
+    "doubled": false,
+    "result": "0-3",
+    "register_date": "2025-10-26T10:19:49.346Z",
+    "status": "SV",
+    "player": 1,
+    "game": 26
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 51,
+  "fields": {
+    "doubled": false,
+    "result": "1-3",
+    "register_date": "2025-10-26T10:19:49.347Z",
+    "status": "SV",
+    "player": 2,
+    "game": 26
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 52,
+  "fields": {
+    "doubled": false,
+    "result": "1-1",
+    "register_date": "2025-10-26T10:20:57.912Z",
+    "status": "SV",
+    "player": 1,
+    "game": 27
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 53,
+  "fields": {
+    "doubled": false,
+    "result": "1-1",
+    "register_date": "2025-10-26T10:20:57.913Z",
+    "status": "SV",
+    "player": 2,
+    "game": 27
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 54,
+  "fields": {
+    "doubled": false,
+    "result": "1-1",
+    "register_date": "2025-10-26T10:46:19.528Z",
+    "status": "SV",
+    "player": 2,
+    "game": 28
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 55,
+  "fields": {
+    "doubled": false,
+    "result": "2-1",
+    "register_date": "2025-10-26T10:46:19.529Z",
+    "status": "SV",
+    "player": 1,
+    "game": 28
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 56,
+  "fields": {
+    "doubled": true,
+    "result": "0-3",
+    "register_date": "2025-10-26T10:46:40.410Z",
+    "status": "SV",
+    "player": 2,
+    "game": 29
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 57,
+  "fields": {
+    "doubled": true,
+    "result": "0-2",
+    "register_date": "2025-10-26T10:46:40.411Z",
+    "status": "SV",
+    "player": 1,
+    "game": 29
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 58,
+  "fields": {
+    "doubled": false,
+    "result": "1-1",
+    "register_date": "2025-10-26T10:47:13.519Z",
+    "status": "SV",
+    "player": 1,
+    "game": 30
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 59,
+  "fields": {
+    "doubled": false,
+    "result": "2-2",
+    "register_date": "2025-10-26T10:47:13.520Z",
+    "status": "SV",
+    "player": 2,
+    "game": 30
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 60,
+  "fields": {
+    "doubled": false,
+    "result": "0-3",
+    "register_date": "2025-10-26T10:47:38.205Z",
+    "status": "SV",
+    "player": 1,
+    "game": 31
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 61,
+  "fields": {
+    "doubled": false,
+    "result": "1-2",
+    "register_date": "2025-10-26T10:47:38.206Z",
+    "status": "SV",
+    "player": 2,
+    "game": 31
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 62,
+  "fields": {
+    "doubled": true,
+    "result": "2-2",
+    "register_date": "2025-10-26T10:48:48.295Z",
+    "status": "SV",
+    "player": 1,
+    "game": 32
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 63,
+  "fields": {
+    "doubled": false,
+    "result": "1-0",
+    "register_date": "2025-10-26T10:48:48.296Z",
+    "status": "EM",
+    "player": 2,
+    "game": 32
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 64,
+  "fields": {
+    "doubled": false,
+    "result": "1-1",
+    "register_date": "2025-10-26T10:49:06.820Z",
+    "status": "SV",
+    "player": 1,
+    "game": 33
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 65,
+  "fields": {
+    "doubled": true,
+    "result": "0-0",
+    "register_date": "2025-10-26T10:49:06.821Z",
+    "status": "SV",
+    "player": 2,
+    "game": 33
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 66,
+  "fields": {
+    "doubled": true,
+    "result": "2-0",
+    "register_date": "2025-10-26T10:49:24.879Z",
+    "status": "SV",
+    "player": 2,
+    "game": 34
+  }
+},
+{
+  "model": "predictions.forecast",
+  "pk": 67,
+  "fields": {
+    "doubled": true,
+    "result": "2-0",
+    "register_date": "2025-10-26T10:49:24.880Z",
+    "status": "SV",
+    "player": 1,
+    "game": 34
   }
 }
 ]
