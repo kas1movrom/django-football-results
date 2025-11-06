@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Форма для создания прогнозиста</title>
+</head>
+<body>
+    <header>
+        <h1>Форма для регистрации прогнозиста в турнира</h1>
+    </header>
+
+    <h2>Добавить нового прогнозиста в турнир</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Создать прогнозиста</button>
+        <a href="{% url 'predictions:tournament-detail' tournament.id %}">Отмена</a>
+    </form>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+                {{ message }}
+            </p>
+        {% endfor %}
+    {% endif %}
+    
+    <footer>
+        <p>© 2025</p>
+    </footer>
+</body>
+</html>

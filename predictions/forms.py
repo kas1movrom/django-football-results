@@ -4,17 +4,65 @@ import typing
 
 from django import forms
 
-from .models import Forecast, Forecaster, Game, NationalTeam
+from .models import Forecast, Forecaster, Game, NationalTeam, Participation, Stage, Tournament
+
+
+class ParticipationForm(forms.ModelForm):
+    class Meta:
+        model = Participation
+        fields = ("tournament", "forecaster", "points")
+
+
+class StageForm(forms.ModelForm):
+    class Meta:
+        model = Stage
+        fields = ("st_type", "number", "tournament", "start_date", "finish_date")
+
+        widgets: typing.ClassVar = {
+            "start_date": forms.DateInput(attrs={"type": "date"}),
+            "finish_date": forms.DateInput(attrs={"type": "date"}),
+        }
+
+
+class TournamentForm(forms.ModelForm):
+    class Meta:
+        model = Tournament
+        fields = ("active", "year", "place", "teams_count", "winner", "start_date", "finish_date")
+
+        widgets: typing.ClassVar = {
+            "start_date": forms.DateInput(attrs={"type": "date"}),
+            "finish_date": forms.DateInput(attrs={"type": "date"}),
+        }
+
+
+class ForecasterForm(forms.ModelForm):
+    bio = forms.CharField(
+        widget=forms.Textarea(attrs={"rows": 5, "placeholder": "Describe yourself..."}),
+        required=False,
+        label="Description",
+    )
+
+    class Meta:
+        model = Forecaster
+
+        fields = fields = ("first_name", "last_name", "telegram", "mail", "birthday", "bio")
+
+        widgets: typing.ClassVar = {"birthday": forms.DateInput(attrs={"type": "date"})}
 
 
 class ForecasterProfileForm(forms.ModelForm):
     # Поля из User
     username = forms.CharField(max_length=150, disabled=True, help_text="Имя пользователя нельзя изменить")
     email = forms.EmailField()
+    bio = forms.CharField(
+        widget=forms.Textarea(attrs={"rows": 5, "placeholder": "Describe yourself..."}),
+        required=False,
+        label="Description",
+    )
 
     class Meta:
         model = Forecaster
-        fields = ("first_name", "last_name", "telegram", "mail", "birthday")
+        fields = ("first_name", "last_name", "telegram", "mail", "birthday", "bio")
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop("user", None)

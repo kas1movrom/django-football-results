@@ -1,4 +1,10 @@
-{% if messages %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Мои прогнозы</title>
+</head>
+<body>
+    {% if messages %}
     <div style="margin: 10px 0;">
         {% for message in messages %}
             <p style="padding: 8px; border-radius: 4px; color: white; background-color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
@@ -6,6 +12,60 @@
             </p>
         {% endfor %}
     </div>
-{% endif %}
+    {% endif %}
 
-<h1>Hello, {{ who }}!</h1>
+    <h1>Hello, {{ who }}!</h1>
+
+    <p>Список завершенных турниров</p>
+    {% if closed_tournaments %}
+        <ul>
+        {% for tournament in closed_tournaments %}
+            <li>
+                <a href="{% url 'predictions:tournament-detail' tournament.id %}"><strong>{{ tournament }}</strong></a> active: {{ tournament.active }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Завершенные турниры не найдены.</p>
+    {% endif %}
+
+    <p>Список активных турниров</p>
+    {% if active_tournaments %}
+        <ul>
+        {% for tournament in active_tournaments %}
+            <li>
+                <a href="{% url 'predictions:tournament-detail' tournament.id %}"><strong>{{ tournament }}</strong></a> active: {{ tournament.active }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Активные турниры не найдены.</p>
+    {% endif %}
+
+    <p>Список прогнозистов</p>
+    {% if forecasters %}
+        <ul>
+        {% for forecaster in forecasters %}
+            <li>
+                <a href="{% url 'predictions:forecaster-detail' forecaster.id %}"><strong>{{ forecaster }}</strong></a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Прогнозисты не найдены.</p>
+    {% endif %}
+
+    {% if user.is_staff %}
+        <p>
+            <a href="{% url 'predictions:add-tournament' %}">Добавить новый турнир</a>
+        </p>
+        <p>
+            <a href="{% url 'predictions:add-forecaster' %}">Добавить нового прогнозиста</a>
+        </p>
+    {% endif %}
+    
+    <footer>
+        <p><a href="{% url 'predictions:forecaster-profile' %}">Перейти в профиль</a></p>
+        <p>© 2025</p>
+    </footer>
+</body>

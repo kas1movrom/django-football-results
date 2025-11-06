@@ -12,23 +12,33 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+# TODO: добавить все переменные окружения в .env
+# TODO: применить все настройки безопасности (например, https, csrf, xss и т.д)
+# TODO: добавить обработку mail
+# TODO: развернуть nginx и добавить обработку сертификатов
+# TODO: добавить отдельные permissions
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-q8fm+-jg@k5#1nwwj%1frp64gxu!ezin!)3#yzam)#li0ta$d_"
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_URL = "/login/"
-LOGOUT_REDIRECT_URL = "login"
+LOGIN_URL = os.getenv("LOGIN_URL")
+LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL")
 
 # Application definition
 
@@ -53,10 +63,22 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "predictions.middleware.SecurityHeadersMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "predictions.middleware.RequestLoggingMiddleware",
 ]
 
 ROOT_URLCONF = "football.urls"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+EMAIL_HOST_USER = os.environ.get("MAIL_LOGIN")
+EMAIL_HOST_PASSWORD = os.environ.get("MAIL_PASSWORD")
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 TEMPLATES = [
     {
@@ -83,10 +105,10 @@ INTERNAL_IPS = ["127.0.0.1"]
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "football",
-        "USER": "kasimovroman",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "NAME": os.getenv("DB_NAME"),
+        "USER": os.getenv("DB_USER"),
+        "HOST": os.getenv("DB_HOST"),
+        "PORT": os.getenv("DB_PORT"),
     }
 }
 

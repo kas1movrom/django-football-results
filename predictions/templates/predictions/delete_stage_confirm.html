@@ -1,0 +1,13 @@
+{% extends 'predictions/base.html' %}
+
+{% block content %}
+    <h2>Подтверждение удаления</h2>
+    <p>Вы уверены, что хотите удалить стадию <strong>{{ stage }}</strong>?</p>
+    <p>Все её матчи будут удалены!</p>
+
+    <form method="post" action="{% url 'predictions:delete-stage' stage.id %}">
+        {% csrf_token %}
+        <button type="submit" style="background-color: #d32f2f; color: white;">Да, удалить</button>
+        <a href="{% url 'index' %}">Отмена</a>
+    </form>
+{% endblock %}

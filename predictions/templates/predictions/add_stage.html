@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Форма для создания стадии</title>
+</head>
+<body>
+    <header>
+        <h1>Форма для создания стадии</h1>
+    </header>
+
+    <h2>Добавить новую стадию</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Создать стадию</button>
+        <a href="{% url 'index' %}">Отмена</a>
+    </form>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+                {{ message }}
+            </p>
+        {% endfor %}
+    {% endif %}
+    
+    <footer>
+        <p>© 2025</p>
+    </footer>
+</body>
+</html>

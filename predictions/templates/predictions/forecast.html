@@ -25,12 +25,10 @@
     <p><strong>Количество очков:</strong> {{ forecast.points }}</p>
 
     <!-- Здесь почему-то исчезли кнопки и для легитимного пользователя -->
-    {% if forecast.player.user == user and not user.is_staff %}
-        <p>
-            <a href="{% url 'predictions:edit-forecast' forecast.id %}">Редактировать прогноз</a> |
-            <a href="{% url 'predictions:delete-forecast-confirm' forecast.id %}" style="color: red;">Удалить прогноз</a>
-        </p>
-    {% endif %}
+    <p>
+        <a href="{% url 'predictions:edit-forecast' forecast.id %}">Редактировать прогноз</a> |
+        <a href="{% url 'predictions:delete-forecast' forecast.id %}" style="color: red;">Удалить прогноз</a>
+    </p>
 
     <footer>
         <p><a href="{% url 'predictions:game-forecasts' game.id %}">← Назад к списку прогнозов на матч</a></p>

@@ -1,0 +1,20 @@
+{% extends 'predictions/base.html' %}
+
+{% block content %}
+    <h2>Редактировать участие</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Сохранить изменения</button>
+        <a href="{% url 'predictions:tournament-detail' tournament.id %}">Отмена</a>
+    </form>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+                {{ message }}
+            </p>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
