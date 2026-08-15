@@ -1,5 +1,5 @@
+import requests
 from django.contrib.auth.models import User
-from django.core.mail import send_mail
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -16,10 +16,15 @@ def create_forecaster_profile(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=Forecaster)
 def send_notification(sender, instance, created, **kwargs):
-    send_mail(
-        "Notification from football service",
-        f"Your forecaster profile was {'created' if created else 'updated'}",
-        None,
-        [instance.mail],
-        fail_silently=False,
+    requests.post(
+        url="http://127.0.0.1:8001/events",
+        json={
+            "type": f"profile_{'created' if created else 'updated'}",
+            "user": {
+                "external_id": instance.id,
+                "email": f"{instance.mail}",
+                "role": f"{'admin' if instance.admin else 'user'}",
+            },
+            "payload": {"greeting": "Hello", "user": f"{instance.first_name}"},
+        },
     )
